@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initLucideIcons();
   renderCatalog('all');
   renderGallery();
-  init3DStudio();
+  init360Studio();
   initEmiCalculator();
   initExchangeEstimator();
   initServiceTracker();
@@ -346,592 +346,433 @@ window.closeLightbox = function() {
 };
 
 // ----------------------------------------------------
-// 3. Interactive 3D Motorcycle Showroom Studio (Three.js)
+// 3. Interactive 360° Real Vehicle Turntable Studio
 // ----------------------------------------------------
-let scene, camera, renderer, controls, bikeGroup;
-let bikePaintMaterials = [];
-let currentHotspots = [];
-let isStudioAutoRotating = true;
-
-const HOTSPOTS_DATA = [
-  {
-    id: 'engine',
-    title: 'Race-Tuned Fuel Injection (RT-Fi) Engine',
-    desc: 'Oil-cooled 4-valve combustion chamber with Glide Through Technology (GTT) for zero-stall bumper-to-bumper Pune traffic riding.',
-    pos: [0, 0.4, 0.2]
-  },
-  {
-    id: 'console',
-    title: 'SmartXonnect TFT Digital Telemetry',
-    desc: 'Bluetooth connected display with Turn-by-Turn GPS navigation, lean angle display, call/SMS notifications, and race lap recorder.',
-    pos: [0.75, 1.25, 0]
-  },
-  {
-    id: 'abs',
-    title: 'Dual-Channel Super-Moto ABS',
-    desc: '270mm Roto-Petal front disc brake with calibrated feedback for short, controlled braking distance on Pune monsoon roads.',
-    pos: [1.3, 0.2, 0.1]
-  },
-  {
-    id: 'headlamp',
-    title: 'Bi-LED Projector with Signature DRLs',
-    desc: 'Piercing high-throw LED projector lamp paired with TVS trademark twin-fang DRL brows for unmistakable road presence.',
-    pos: [1.2, 1.05, 0]
-  },
-  {
-    id: 'suspension',
-    title: 'Race-Tuned Showa Monoshock',
-    desc: 'Developed in conjunction with 6-time National Championship winning TVS Racing factory team for razor-sharp high-speed stability.',
-    pos: [-0.65, 0.55, 0]
-  }
-];
-
-function init3DStudio() {
-  const container = document.getElementById('three-canvas-container');
-  if (!container) return;
-
-  // Scene
-  scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xF8FAFC);
-
-  // Camera
-  const width = container.clientWidth || 800;
-  const height = container.clientHeight || 500;
-  camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 100);
-  camera.position.set(3.8, 1.8, 3.2);
-
-  // Renderer
-  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-  renderer.setSize(width, height);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.15;
-  container.appendChild(renderer.domElement);
-
-  // OrbitControls
-  controls = new THREE.OrbitControls(camera, renderer.domElement);
-  controls.enableDamping = true;
-  controls.dampingFactor = 0.05;
-  controls.maxPolarAngle = Math.PI / 2 - 0.05;
-  controls.minDistance = 2.0;
-  controls.maxDistance = 6.5;
-  controls.target.set(0, 0.6, 0);
-
-  // Lighting
-  const ambientLight = new THREE.AmbientLight(0xffffff, 1.3);
-  scene.add(ambientLight);
-
-  const mainLight = new THREE.DirectionalLight(0xffffff, 2.0);
-  mainLight.position.set(5, 7, 4);
-  mainLight.castShadow = true;
-  mainLight.shadow.mapSize.width = 2048;
-  mainLight.shadow.mapSize.height = 2048;
-  mainLight.shadow.bias = -0.0005;
-  scene.add(mainLight);
-
-  const fillLight = new THREE.DirectionalLight(0xF1F5F9, 1.2);
-  fillLight.position.set(-5, 4, -4);
-  scene.add(fillLight);
-
-  const topRimLight = new THREE.SpotLight(0xffffff, 1.8);
-  topRimLight.position.set(0, 6, 0);
-  topRimLight.angle = Math.PI / 4;
-  scene.add(topRimLight);
-
-  // Turntable Showroom Floor in Official Royal Cobalt Blue & Crimson Red
-  createShowroomFloor();
-
-  // Procedural 3D Motorcycle
-  build3DMotorcycle();
-
-  // Create Hotspot HTML overlays
-  create3DHotspotElements(container);
-
-  // Resize handler
-  window.addEventListener('resize', onStudioResize);
-
-  // Start Animation Loop
-  animateStudio();
-}
-
-function createShowroomFloor() {
-  const floorGeo = new THREE.CylinderGeometry(2.8, 2.85, 0.06, 64);
-  const floorMat = new THREE.MeshStandardMaterial({
-    color: 0xFFFFFF,
-    metalness: 0.15,
-    roughness: 0.3
-  });
-  const floor = new THREE.Mesh(floorGeo, floorMat);
-  floor.position.y = -0.03;
-  floor.receiveShadow = true;
-  scene.add(floor);
-
-  // Outer ring in TVS Royal Cobalt Blue (#013D93)
-  const ringGeo = new THREE.RingGeometry(2.78, 2.84, 64);
-  const ringMat = new THREE.MeshBasicMaterial({ color: 0x013D93, side: THREE.DoubleSide });
-  const ring = new THREE.Mesh(ringGeo, ringMat);
-  ring.rotation.x = -Math.PI / 2;
-  ring.position.y = 0.005;
-  scene.add(ring);
-
-  // Inner ring in TVS Pegasus Crimson Red (#D91D2F)
-  const innerRingGeo = new THREE.RingGeometry(1.2, 1.22, 48);
-  const innerRingMat = new THREE.MeshBasicMaterial({ color: 0xD91D2F, side: THREE.DoubleSide });
-  const innerRing = new THREE.Mesh(innerRingGeo, innerRingMat);
-  innerRing.rotation.x = -Math.PI / 2;
-  innerRing.position.y = 0.005;
-  scene.add(innerRing);
-}
-
-function build3DMotorcycle() {
-  bikeGroup = new THREE.Group();
-  scene.add(bikeGroup);
-
-  // PBR Materials
-  const chromeMat = new THREE.MeshStandardMaterial({ color: 0xE2E8F0, metalness: 0.95, roughness: 0.1 });
-  const darkMetalMat = new THREE.MeshStandardMaterial({ color: 0x1E293B, metalness: 0.8, roughness: 0.3 });
-  const tireRubberMat = new THREE.MeshStandardMaterial({ color: 0x1A1C1E, roughness: 0.9, metalness: 0.05 });
-  const goldForksMat = new THREE.MeshStandardMaterial({ color: 0xD4AF37, metalness: 0.9, roughness: 0.2 });
-  const redBrakeMat = new THREE.MeshStandardMaterial({ color: 0xD91D2F, metalness: 0.4, roughness: 0.3 });
-
-  // Initial Paint Material: TVS Royal Cobalt Blue (#013D93)
-  const bodyPaintMat = new THREE.MeshStandardMaterial({
-    color: 0x013D93,
-    metalness: 0.75,
-    roughness: 0.22,
-    clearcoat: 0.9,
-    clearcoatRoughness: 0.12
-  });
-  bikePaintMaterials.push(bodyPaintMat);
-
-  // 1. WHEELS & BRAKES
-  function createWheel(xPos, isRear = false) {
-    const wheelGroup = new THREE.Group();
-    wheelGroup.position.set(xPos, 0.42, 0);
-
-    const tireGeo = new THREE.TorusGeometry(0.38, 0.12, 24, 48);
-    const tire = new THREE.Mesh(tireGeo, tireRubberMat);
-    tire.castShadow = true;
-    wheelGroup.add(tire);
-
-    const rimGeo = new THREE.CylinderGeometry(0.32, 0.32, 0.14, 32);
-    rimGeo.rotateX(Math.PI / 2);
-    const rim = new THREE.Mesh(rimGeo, darkMetalMat);
-    rim.castShadow = true;
-    wheelGroup.add(rim);
-
-    for (let i = 0; i < 5; i++) {
-      const spokeGeo = new THREE.BoxGeometry(0.04, 0.58, 0.02);
-      const spoke = new THREE.Mesh(spokeGeo, chromeMat);
-      spoke.rotation.z = (i * Math.PI) / 2.5;
-      wheelGroup.add(spoke);
+const VEHICLES_360 = {
+  apache_310: {
+    id: 'apache_310',
+    title: 'TVS Apache RTR 310',
+    badge: 'Racing Flagship',
+    badgeClass: 'bg-red-50 text-[#D91D2F] border-red-200',
+    subtitle: 'Dual-Channel Cornering ABS • 35.6 PS Track Brawler',
+    modelName: 'TVS Apache RTR 310',
+    ext: 'png',
+    frameCount: 25,
+    colors: [
+      { id: 'arsenalblack', name: 'Arsenal Black', hex: '#1E293B' },
+      { id: 'furyyellow', name: 'Fury Yellow', hex: '#FACC15' }
+    ],
+    techHighlight: 'Bi-Directional Quickshifter & Cruise Control',
+    specs: {
+      engine: '312.12 cc',
+      engineSub: 'DOHC Liquid Cooled',
+      power: '35.6 PS',
+      powerSub: '@ 9700 rpm (28.7 Nm)',
+      speed: '150 km/h',
+      speedSub: '0-60 in 2.81s',
+      mileage: '30 - 32 kmpl',
+      mileageSub: 'RT-Fi Race Telemetry',
+      price: '₹ 2,86,500*',
+      priceSub: 'Bibwewadi On-Road'
     }
-
-    const discGeo = new THREE.RingGeometry(0.12, 0.24, 32);
-    const discMat = new THREE.MeshStandardMaterial({ color: 0xCBD5E1, metalness: 0.9, roughness: 0.2, side: THREE.DoubleSide });
-    const disc = new THREE.Mesh(discGeo, discMat);
-    disc.position.z = 0.08;
-    wheelGroup.add(disc);
-
-    const caliperGeo = new THREE.BoxGeometry(0.08, 0.12, 0.06);
-    const caliper = new THREE.Mesh(caliperGeo, redBrakeMat);
-    caliper.position.set(0.18, 0.12, 0.09);
-    wheelGroup.add(caliper);
-
-    return wheelGroup;
+  },
+  raider_125: {
+    id: 'raider_125',
+    title: 'TVS Raider 125',
+    badge: 'Wicked Commuter',
+    badgeClass: 'bg-amber-50 text-amber-700 border-amber-200',
+    subtitle: 'Naked Streetfighter DNA • Animalistic LED Headlamp',
+    modelName: 'TVS Raider 125',
+    ext: 'webp',
+    frameCount: 9,
+    colors: [
+      { id: 'red', name: 'Blazing Red', hex: '#DC2626' },
+      { id: 'black', name: 'Wicked Black', hex: '#1E293B' },
+      { id: 'blue', name: 'Striking Blue', hex: '#2563EB' }
+    ],
+    techHighlight: 'Gas-Charged Mono-shock & Eco/Power Modes',
+    specs: {
+      engine: '124.8 cc',
+      engineSub: '3-Valve Air & Oil Cooled',
+      power: '11.38 PS',
+      powerSub: '@ 7500 rpm (11.2 Nm)',
+      speed: '99 km/h',
+      speedSub: '0-60 in 5.9s',
+      mileage: '65 - 67 kmpl',
+      mileageSub: 'Best-in-Class Mileage',
+      price: '₹ 1,14,500*',
+      priceSub: 'Bibwewadi On-Road'
+    }
+  },
+  jupiter_110: {
+    id: 'jupiter_110',
+    title: 'TVS Jupiter 110 SmartXonnect',
+    badge: 'Family Favorite',
+    badgeClass: 'bg-blue-50 text-[#013D93] border-blue-200',
+    subtitle: 'Zyada Ka Fayda • 33L Underseat Dual-Helmet Storage',
+    modelName: 'TVS Jupiter 125 SmartXonnect',
+    ext: 'webp',
+    frameCount: 25,
+    colors: [
+      { id: 'dawn_blue', name: 'Dawn Blue Matte', hex: '#1E40AF' },
+      { id: 'galactic_copper', name: 'Galactic Copper Matte', hex: '#C2410C' }
+    ],
+    techHighlight: 'iGO Electric Assist & External Front Fuel Tank',
+    specs: {
+      engine: '113.3 cc',
+      engineSub: 'iGO Assist Air Cooled',
+      power: '8.02 PS',
+      powerSub: '@ 6500 rpm (9.8 Nm)',
+      speed: '82 km/h',
+      speedSub: 'Smooth & Vibration-Free',
+      mileage: '55 - 58 kmpl',
+      mileageSub: 'i-Touch Start EcoThrust',
+      price: '₹ 94,800*',
+      priceSub: 'Bibwewadi On-Road'
+    }
+  },
+  radeon_110: {
+    id: 'radeon_110',
+    title: 'TVS Radeon 110 DuraLife',
+    badge: 'Heavy-Duty Commuter',
+    badgeClass: 'bg-slate-100 text-slate-800 border-slate-300',
+    subtitle: 'Synchronised Braking Tech • Tough Metal Body Frame',
+    modelName: 'TVS Radeon 110',
+    ext: 'webp',
+    frameCount: 24,
+    colors: [
+      { id: 'black', name: 'All-Black Special Edition', hex: '#18181B' }
+    ],
+    techHighlight: 'Synchronised Braking Tech & Metal Body Chassis',
+    specs: {
+      engine: '109.7 cc',
+      engineSub: 'DuraLife EcoThrust Fi',
+      power: '8.19 PS',
+      powerSub: '@ 7350 rpm (8.7 Nm)',
+      speed: '90 km/h',
+      speedSub: 'Sturdy Highway Cruiser',
+      mileage: '68 kmpl',
+      mileageSub: 'Real-Time Mileage Indicator',
+      price: '₹ 82,400*',
+      priceSub: 'Bibwewadi On-Road'
+    }
   }
+};
 
-  const frontWheel = createWheel(1.25, false);
-  const rearWheel = createWheel(-1.15, true);
-  bikeGroup.add(frontWheel);
-  bikeGroup.add(rearWheel);
+let activeVehicleId = 'apache_310';
+let activeColorId = 'arsenalblack';
+let currentFrameIndex = 1;
+let is360AutoSpinning = false;
+let autoSpinTimer = null;
+let isTurntableDragging = false;
+let dragStartX = 0;
+let dragStartFrame = 1;
+let hasUserInteracted = false;
+const preloadedImagesCache = {};
 
-  // 2. FRONT SUSPENSION FORKS
-  const forkLeftGeo = new THREE.CylinderGeometry(0.032, 0.032, 0.9, 24);
-  const forkLeft = new THREE.Mesh(forkLeftGeo, goldForksMat);
-  forkLeft.position.set(1.05, 0.85, 0.11);
-  forkLeft.rotation.z = -0.38;
-  forkLeft.castShadow = true;
-  bikeGroup.add(forkLeft);
+function init360Studio() {
+  const stage = document.getElementById('turntable-stage');
+  if (!stage) return;
 
-  const forkRight = forkLeft.clone();
-  forkRight.position.z = -0.11;
-  bikeGroup.add(forkRight);
+  // Set up vehicle UI
+  update360VehicleDisplay();
 
-  const clampGeo = new THREE.BoxGeometry(0.12, 0.04, 0.28);
-  const clamp = new THREE.Mesh(clampGeo, darkMetalMat);
-  clamp.position.set(0.9, 1.15, 0);
-  clamp.rotation.z = -0.38;
-  bikeGroup.add(clamp);
+  // Mouse drag interactions
+  stage.addEventListener('mousedown', (e) => {
+    isTurntableDragging = true;
+    dragStartX = e.clientX;
+    dragStartFrame = currentFrameIndex;
+    if (is360AutoSpinning) stop360AutoSpin();
+    hideDragHint();
+  });
 
-  // 3. ENGINE BLOCK & EXHAUST
-  const engineBlockGeo = new THREE.BoxGeometry(0.55, 0.45, 0.3);
-  const engineBlock = new THREE.Mesh(engineBlockGeo, darkMetalMat);
-  engineBlock.position.set(0.05, 0.45, 0);
-  engineBlock.castShadow = true;
-  bikeGroup.add(engineBlock);
+  window.addEventListener('mousemove', (e) => {
+    if (!isTurntableDragging) return;
+    const v = VEHICLES_360[activeVehicleId];
+    const deltaX = e.clientX - dragStartX;
+    const pixelsPerFrame = 12; // sensitivity
+    const frameShift = Math.round(deltaX / pixelsPerFrame);
+    
+    // Natural rotation direction (dragging left spins clockwise)
+    let newFrame = ((dragStartFrame - 1 - frameShift) % v.frameCount + v.frameCount) % v.frameCount + 1;
+    set360Frame(newFrame);
+  });
 
-  for (let f = 0; f < 5; f++) {
-    const finGeo = new THREE.BoxGeometry(0.4, 0.015, 0.34);
-    const fin = new THREE.Mesh(finGeo, chromeMat);
-    fin.position.set(0.08, 0.52 + f * 0.035, 0);
-    bikeGroup.add(fin);
-  }
+  window.addEventListener('mouseup', () => {
+    isTurntableDragging = false;
+  });
 
-  const caseGeo = new THREE.CylinderGeometry(0.14, 0.14, 0.08, 32);
-  caseGeo.rotateX(Math.PI / 2);
-  const caseCover = new THREE.Mesh(caseGeo, goldForksMat);
-  caseCover.position.set(0.05, 0.38, 0.18);
-  bikeGroup.add(caseCover);
+  // Touch interactions
+  stage.addEventListener('touchstart', (e) => {
+    if (e.touches.length > 0) {
+      isTurntableDragging = true;
+      dragStartX = e.touches[0].clientX;
+      dragStartFrame = currentFrameIndex;
+      if (is360AutoSpinning) stop360AutoSpin();
+      hideDragHint();
+    }
+  }, { passive: true });
 
-  const exhaustCurve = new THREE.CatmullRomCurve3([
-    new THREE.Vector3(0.28, 0.55, 0.12),
-    new THREE.Vector3(0.35, 0.32, 0.15),
-    new THREE.Vector3(0.0, 0.22, 0.16),
-    new THREE.Vector3(-0.4, 0.25, 0.22),
-    new THREE.Vector3(-0.95, 0.5, 0.24)
-  ]);
-  const exhaustGeo = new THREE.TubeGeometry(exhaustCurve, 32, 0.038, 16, false);
-  const exhaustPipe = new THREE.Mesh(exhaustGeo, chromeMat);
-  exhaustPipe.castShadow = true;
-  bikeGroup.add(exhaustPipe);
+  window.addEventListener('touchmove', (e) => {
+    if (!isTurntableDragging || e.touches.length === 0) return;
+    const v = VEHICLES_360[activeVehicleId];
+    const deltaX = e.touches[0].clientX - dragStartX;
+    const pixelsPerFrame = 14;
+    const frameShift = Math.round(deltaX / pixelsPerFrame);
+    
+    let newFrame = ((dragStartFrame - 1 - frameShift) % v.frameCount + v.frameCount) % v.frameCount + 1;
+    set360Frame(newFrame);
+  }, { passive: true });
 
-  const mufflerGeo = new THREE.CylinderGeometry(0.075, 0.065, 0.55, 24);
-  mufflerGeo.rotateZ(Math.PI / 3.2);
-  const muffler = new THREE.Mesh(mufflerGeo, darkMetalMat);
-  muffler.position.set(-0.85, 0.48, 0.24);
-  muffler.castShadow = true;
-  bikeGroup.add(muffler);
+  window.addEventListener('touchend', () => {
+    isTurntableDragging = false;
+  });
 
-  const shieldGeo = new THREE.CylinderGeometry(0.082, 0.072, 0.35, 24, 1, true, 0, Math.PI);
-  shieldGeo.rotateZ(Math.PI / 3.2);
-  const shield = new THREE.Mesh(shieldGeo, chromeMat);
-  shield.position.set(-0.82, 0.49, 0.25);
-  bikeGroup.add(shield);
-
-  // 4. CHASSIS / FRAME
-  const frameBarGeo = new THREE.CylinderGeometry(0.024, 0.024, 0.95, 16);
-  const frameLeft = new THREE.Mesh(frameBarGeo, bodyPaintMat);
-  frameLeft.position.set(0.45, 0.72, 0.14);
-  frameLeft.rotation.z = -0.85;
-  bikeGroup.add(frameLeft);
-
-  const frameRight = frameLeft.clone();
-  frameRight.position.z = -0.14;
-  bikeGroup.add(frameRight);
-
-  const swingarmGeo = new THREE.BoxGeometry(0.85, 0.06, 0.26);
-  const swingarm = new THREE.Mesh(swingarmGeo, darkMetalMat);
-  swingarm.position.set(-0.6, 0.38, 0);
-  swingarm.rotation.z = 0.12;
-  bikeGroup.add(swingarm);
-
-  const shockGeo = new THREE.CylinderGeometry(0.035, 0.035, 0.32, 16);
-  const shock = new THREE.Mesh(shockGeo, redBrakeMat);
-  shock.position.set(-0.4, 0.55, 0);
-  shock.rotation.z = 0.65;
-  bikeGroup.add(shock);
-
-  // 5. FUEL TANK
-  const tankGeo = new THREE.BoxGeometry(0.72, 0.34, 0.38);
-  const tank = new THREE.Mesh(tankGeo, bodyPaintMat);
-  tank.position.set(0.35, 0.92, 0);
-  tank.castShadow = true;
-  bikeGroup.add(tank);
-
-  const capGeo = new THREE.CylinderGeometry(0.065, 0.065, 0.02, 24);
-  const cap = new THREE.Mesh(capGeo, chromeMat);
-  cap.position.set(0.42, 1.1, 0);
-  bikeGroup.add(cap);
-
-  const shroudLGeo = new THREE.ConeGeometry(0.18, 0.45, 4);
-  shroudLGeo.rotateZ(-Math.PI / 2.3);
-  const shroudL = new THREE.Mesh(shroudLGeo, bodyPaintMat);
-  shroudL.position.set(0.68, 0.85, 0.2);
-  bikeGroup.add(shroudL);
-
-  const shroudR = shroudL.clone();
-  shroudR.position.z = -0.2;
-  bikeGroup.add(shroudR);
-
-  // 6. SEAT & COWL
-  const seatGeo = new THREE.BoxGeometry(0.75, 0.12, 0.26);
-  const seatMat = new THREE.MeshStandardMaterial({ color: 0x0F172A, roughness: 0.9 });
-  const seat = new THREE.Mesh(seatGeo, seatMat);
-  seat.position.set(-0.25, 0.88, 0);
-  seat.castShadow = true;
-  bikeGroup.add(seat);
-
-  const pillionGeo = new THREE.BoxGeometry(0.35, 0.1, 0.22);
-  const pillion = new THREE.Mesh(pillionGeo, seatMat);
-  pillion.position.set(-0.55, 0.96, 0);
-  bikeGroup.add(pillion);
-
-  const tailGeo = new THREE.ConeGeometry(0.16, 0.55, 4);
-  tailGeo.rotateZ(Math.PI / 2.2);
-  const tail = new THREE.Mesh(tailGeo, bodyPaintMat);
-  tail.position.set(-0.85, 0.92, 0);
-  tail.castShadow = true;
-  bikeGroup.add(tail);
-
-  const tailLightGeo = new THREE.BoxGeometry(0.04, 0.06, 0.14);
-  const tailLightMat = new THREE.MeshBasicMaterial({ color: 0xD91D2F });
-  const tailLight = new THREE.Mesh(tailLightGeo, tailLightMat);
-  tailLight.position.set(-1.12, 0.94, 0);
-  bikeGroup.add(tailLight);
-
-  // 7. COCKPIT
-  const barGeo = new THREE.CylinderGeometry(0.016, 0.016, 0.65, 16);
-  barGeo.rotateX(Math.PI / 2);
-  const handlebars = new THREE.Mesh(barGeo, chromeMat);
-  handlebars.position.set(0.75, 1.18, 0);
-  bikeGroup.add(handlebars);
-
-  const gripLGeo = new THREE.CylinderGeometry(0.024, 0.024, 0.12, 16);
-  gripLGeo.rotateX(Math.PI / 2);
-  const gripL = new THREE.Mesh(gripLGeo, tireRubberMat);
-  gripL.position.set(0.75, 1.18, 0.28);
-  bikeGroup.add(gripL);
-
-  const gripR = gripL.clone();
-  gripR.position.z = -0.28;
-  bikeGroup.add(gripR);
-
-  const dashGeo = new THREE.BoxGeometry(0.12, 0.08, 0.14);
-  dashGeo.rotateZ(-0.4);
-  const dashMat = new THREE.MeshStandardMaterial({ color: 0x0F172A });
-  const dash = new THREE.Mesh(dashGeo, dashMat);
-  dash.position.set(0.72, 1.24, 0);
-  bikeGroup.add(dash);
-
-  const screenFaceGeo = new THREE.PlaneGeometry(0.11, 0.07);
-  const screenFaceMat = new THREE.MeshBasicMaterial({ color: 0x013D93 });
-  const screenFace = new THREE.Mesh(screenFaceGeo, screenFaceMat);
-  screenFace.rotation.y = -Math.PI / 2;
-  screenFace.rotation.z = 0.4;
-  screenFace.position.set(0.73, 1.25, 0);
-  bikeGroup.add(screenFace);
-
-  const mirrorStemGeo = new THREE.CylinderGeometry(0.008, 0.008, 0.22, 8);
-  const mirrorLStem = new THREE.Mesh(mirrorStemGeo, darkMetalMat);
-  mirrorLStem.position.set(0.8, 1.28, 0.24);
-  mirrorLStem.rotation.x = 0.5;
-  bikeGroup.add(mirrorLStem);
-
-  const mirrorHeadGeo = new THREE.BoxGeometry(0.08, 0.05, 0.02);
-  const mirrorHeadL = new THREE.Mesh(mirrorHeadGeo, darkMetalMat);
-  mirrorHeadL.position.set(0.8, 1.36, 0.32);
-  bikeGroup.add(mirrorHeadL);
-
-  const mirrorRStem = mirrorLStem.clone();
-  mirrorRStem.position.z = -0.24;
-  mirrorRStem.rotation.x = -0.5;
-  bikeGroup.add(mirrorRStem);
-
-  const mirrorHeadR = mirrorHeadL.clone();
-  mirrorHeadR.position.z = -0.32;
-  bikeGroup.add(mirrorHeadR);
-
-  // 8. HEADLAMP
-  const headlampFairingGeo = new THREE.ConeGeometry(0.24, 0.38, 4);
-  headlampFairingGeo.rotateZ(-Math.PI / 1.8);
-  const headlampFairing = new THREE.Mesh(headlampFairingGeo, bodyPaintMat);
-  headlampFairing.position.set(1.12, 1.04, 0);
-  headlampFairing.castShadow = true;
-  bikeGroup.add(headlampFairing);
-
-  const lensGeo = new THREE.SphereGeometry(0.055, 16, 16);
-  const lensMat = new THREE.MeshBasicMaterial({ color: 0xEFF6FF });
-  const lensL = new THREE.Mesh(lensGeo, lensMat);
-  lensL.position.set(1.26, 1.02, 0.05);
-  bikeGroup.add(lensL);
-
-  const lensR = lensL.clone();
-  lensR.position.z = -0.05;
-  bikeGroup.add(lensR);
-
-  bikeGroup.position.y = 0.02;
+  // Preload initial frames
+  preloadVehicleFrames(activeVehicleId, activeColorId);
 }
 
-function create3DHotspotElements(container) {
-  const overlay = document.getElementById('three-hotspots-overlay');
-  if (!overlay) return;
-  overlay.innerHTML = '';
+function hideDragHint() {
+  if (!hasUserInteracted) {
+    hasUserInteracted = true;
+    const hint = document.getElementById('v-drag-hint');
+    if (hint) {
+      hint.style.opacity = '0';
+      setTimeout(() => hint.remove(), 600);
+    }
+  }
+}
 
-  currentHotspots = HOTSPOTS_DATA.map((h, idx) => {
-    const el = document.createElement('div');
-    el.className = 'hotspot-pin';
-    el.innerHTML = `<span>${idx + 1}</span>`;
-    el.title = h.title;
-    el.addEventListener('click', (e) => {
-      e.stopPropagation();
-      showHotspotDetail(h);
-      focusHotspotCamera(h.pos);
-    });
-    overlay.appendChild(el);
+function update360VehicleDisplay() {
+  const v = VEHICLES_360[activeVehicleId];
+  if (!v) return;
 
-    return {
-      element: el,
-      data: h,
-      vector: new THREE.Vector3(...h.pos)
+  // Title, Subtitle, Badges
+  const titleEl = document.getElementById('v-title');
+  const subEl = document.getElementById('v-subtitle');
+  const badgeEl = document.getElementById('v-badge');
+  const techEl = document.getElementById('v-tech-text');
+
+  if (titleEl) titleEl.textContent = v.title;
+  if (subEl) subEl.textContent = v.subtitle;
+  if (techEl) techEl.textContent = v.techHighlight;
+
+  if (badgeEl) {
+    badgeEl.textContent = v.badge;
+    badgeEl.className = `px-2.5 py-1 rounded-full text-xs font-black uppercase tracking-wider border ${v.badgeClass}`;
+  }
+
+  // Specs HUD
+  const elEngine = document.getElementById('spec-engine');
+  const elEngineSub = document.getElementById('spec-engine-sub');
+  const elPower = document.getElementById('spec-power');
+  const elPowerSub = document.getElementById('spec-power-sub');
+  const elSpeed = document.getElementById('spec-speed');
+  const elSpeedSub = document.getElementById('spec-speed-sub');
+  const elMileage = document.getElementById('spec-mileage');
+  const elMileageSub = document.getElementById('spec-mileage-sub');
+  const elPrice = document.getElementById('spec-price');
+
+  if (elEngine) elEngine.textContent = v.specs.engine;
+  if (elEngineSub) elEngineSub.textContent = v.specs.engineSub;
+  if (elPower) elPower.textContent = v.specs.power;
+  if (elPowerSub) elPowerSub.textContent = v.specs.powerSub;
+  if (elSpeed) elSpeed.textContent = v.specs.speed;
+  if (elSpeedSub) elSpeedSub.textContent = v.specs.speedSub;
+  if (elMileage) elMileage.textContent = v.specs.mileage;
+  if (elMileageSub) elMileageSub.textContent = v.specs.mileageSub;
+  if (elPrice) elPrice.textContent = v.specs.price;
+
+  // Color Swatches
+  const swatchesContainer = document.getElementById('v-color-swatches');
+  const colorNameEl = document.getElementById('v-color-name');
+  if (swatchesContainer) {
+    swatchesContainer.innerHTML = v.colors.map(c => `
+      <button onclick="switch360Color('${c.id}', '${c.name}', this)" class="color-swatch-360 w-7 h-7 rounded-full border-2 border-white shadow transition-all duration-200 hover:scale-110 ${c.id === activeColorId ? 'ring-4 ring-[#013D93] scale-110' : ''}" style="background-color: ${c.hex};" title="${c.name}"></button>
+    `).join('');
+  }
+  const activeColorObj = v.colors.find(c => c.id === activeColorId) || v.colors[0];
+  if (colorNameEl) colorNameEl.textContent = activeColorObj.name;
+
+  // Reset Scrubber and frame
+  currentFrameIndex = 1;
+  set360Frame(1);
+}
+
+function preloadVehicleFrames(vehicleId, colorId) {
+  const v = VEHICLES_360[vehicleId];
+  if (!v) return;
+
+  const cacheKey = `${vehicleId}_${colorId}`;
+  if (preloadedImagesCache[cacheKey]) return; // Already cached
+
+  preloadedImagesCache[cacheKey] = [];
+  const loaderEl = document.getElementById('v-loader');
+  if (loaderEl) loaderEl.classList.remove('opacity-0', 'pointer-events-none');
+
+  let loadedCount = 0;
+  for (let i = 1; i <= v.frameCount; i++) {
+    const img = new Image();
+    img.src = `assets/vehicles/${vehicleId}/${colorId}/${i}.${v.ext}`;
+    img.onload = () => {
+      loadedCount++;
+      if (loadedCount >= Math.min(v.frameCount, 5) && loaderEl) {
+        loaderEl.classList.add('opacity-0', 'pointer-events-none');
+      }
     };
-  });
-}
-
-function updateHotspotsPosition() {
-  const container = document.getElementById('three-canvas-container');
-  if (!container || !renderer || !camera) return;
-
-  const width = container.clientWidth;
-  const height = container.clientHeight;
-
-  currentHotspots.forEach(item => {
-    const worldPos = item.vector.clone();
-    worldPos.applyAxisAngle(new THREE.Vector3(0, 1, 0), bikeGroup.rotation.y);
-    worldPos.add(bikeGroup.position);
-
-    const screenPos = worldPos.clone().project(camera);
-    const isBehind = screenPos.z > 1.0;
-
-    if (isBehind) {
-      item.element.style.display = 'none';
-    } else {
-      item.element.style.display = 'flex';
-      const x = (screenPos.x * 0.5 + 0.5) * width;
-      const y = (-(screenPos.y * 0.5) + 0.5) * height;
-      item.element.style.left = `${x}px`;
-      item.element.style.top = `${y}px`;
-    }
-  });
-}
-
-function showHotspotDetail(hotspot) {
-  const card = document.getElementById('hotspot-info-card');
-  const title = document.getElementById('hotspot-title');
-  const desc = document.getElementById('hotspot-desc');
-  if (!card || !title || !desc) return;
-
-  title.textContent = hotspot.title;
-  desc.textContent = hotspot.desc;
-
-  card.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
-  card.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
-}
-
-window.closeHotspotDetail = function() {
-  const card = document.getElementById('hotspot-info-card');
-  if (card) {
-    card.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
-    card.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+    img.onerror = () => {
+      loadedCount++;
+      if (loadedCount >= v.frameCount && loaderEl) {
+        loaderEl.classList.add('opacity-0', 'pointer-events-none');
+      }
+    };
+    preloadedImagesCache[cacheKey].push(img);
   }
+}
+
+function set360Frame(frameIdx) {
+  const v = VEHICLES_360[activeVehicleId];
+  if (!v) return;
+
+  currentFrameIndex = Math.max(1, Math.min(frameIdx, v.frameCount));
+  const turntableImg = document.getElementById('v-turntable-img');
+  if (turntableImg) {
+    turntableImg.src = `assets/vehicles/${activeVehicleId}/${activeColorId}/${currentFrameIndex}.${v.ext}`;
+  }
+
+  // Update Angle HUD & Scrubber
+  const deg = Math.round(((currentFrameIndex - 1) / v.frameCount) * 360);
+  const angleEl = document.getElementById('v-angle-text');
+  const scrubber = document.getElementById('v-scrubber');
+  const scrubberVal = document.getElementById('v-scrubber-val');
+
+  if (angleEl) angleEl.textContent = `${deg}°`;
+  if (scrubberVal) scrubberVal.textContent = `${deg}°`;
+  if (scrubber && !isTurntableDragging) {
+    scrubber.value = deg;
+  }
+}
+
+window.switch360Vehicle = function(vehicleId, btnEl) {
+  if (activeVehicleId === vehicleId) return;
+  activeVehicleId = vehicleId;
+  const v = VEHICLES_360[vehicleId];
+  activeColorId = v.colors[0].id;
+
+  // Update Tab styling
+  document.querySelectorAll('.vehicle-tab-btn').forEach(btn => {
+    btn.classList.remove('bg-[#013D93]', 'text-white', 'shadow-md');
+    btn.classList.add('bg-transparent', 'text-slate-700', 'hover:bg-white', 'hover:shadow-sm');
+  });
+  if (btnEl) {
+    btnEl.classList.remove('bg-transparent', 'text-slate-700', 'hover:bg-white', 'hover:shadow-sm');
+    btnEl.classList.add('bg-[#013D93]', 'text-white', 'shadow-md');
+  }
+
+  preloadVehicleFrames(activeVehicleId, activeColorId);
+  update360VehicleDisplay();
 };
 
-function focusHotspotCamera(posArray) {
-  isStudioAutoRotating = false;
-  document.getElementById('autorotate-btn')?.classList.remove('bg-[#013D93]', 'text-white');
+window.switch360Color = function(colorId, colorName, btnEl) {
+  activeColorId = colorId;
+  const colorNameEl = document.getElementById('v-color-name');
+  if (colorNameEl) colorNameEl.textContent = colorName;
 
-  const targetVec = new THREE.Vector3(...posArray);
-  if (window.gsap) {
-    gsap.to(controls.target, {
-      x: targetVec.x,
-      y: targetVec.y,
-      z: targetVec.z,
-      duration: 1.2,
-      ease: 'power2.out'
-    });
-    gsap.to(camera.position, {
-      x: targetVec.x + 1.8,
-      y: targetVec.y + 0.8,
-      z: targetVec.z + 1.6,
-      duration: 1.4,
-      ease: 'power2.out'
-    });
-  }
-}
-
-window.set3DCameraPreset = function(preset) {
-  isStudioAutoRotating = false;
-  const autoBtn = document.getElementById('autorotate-btn');
-  if (autoBtn) autoBtn.classList.remove('bg-[#013D93]', 'text-white');
-
-  let targetPos = new THREE.Vector3(0, 0.6, 0);
-  let camPos = new THREE.Vector3(3.8, 1.8, 3.2);
-
-  if (preset === 'profile') {
-    camPos.set(0, 1.0, 3.8);
-    targetPos.set(0, 0.6, 0);
-  } else if (preset === 'front') {
-    camPos.set(3.6, 1.2, 0.1);
-    targetPos.set(0.6, 0.8, 0);
-  } else if (preset === 'cockpit') {
-    camPos.set(0.1, 1.8, 0.7);
-    targetPos.set(0.7, 1.15, 0);
-  } else if (preset === 'engine') {
-    camPos.set(1.4, 0.7, 1.4);
-    targetPos.set(0.1, 0.45, 0);
-  }
-
-  if (window.gsap) {
-    gsap.to(camera.position, { x: camPos.x, y: camPos.y, z: camPos.z, duration: 1.2, ease: 'power2.inOut' });
-    gsap.to(controls.target, { x: targetPos.x, y: targetPos.y, z: targetPos.z, duration: 1.2, ease: 'power2.inOut' });
-  } else {
-    camera.position.copy(camPos);
-    controls.target.copy(targetPos);
-  }
-};
-
-window.set3DColor = function(colorHex, name, element) {
-  bikePaintMaterials.forEach(mat => {
-    mat.color.setHex(colorHex);
-  });
-
-  const nameEl = document.getElementById('active-color-name');
-  if (nameEl) nameEl.textContent = name;
-
-  document.querySelectorAll('.color-swatch-btn').forEach(btn => {
+  document.querySelectorAll('.color-swatch-360').forEach(btn => {
     btn.classList.remove('ring-4', 'ring-[#013D93]', 'scale-110');
   });
-  if (element) {
-    element.classList.add('ring-4', 'ring-[#013D93]', 'scale-110');
+  if (btnEl) {
+    btnEl.classList.add('ring-4', 'ring-[#013D93]', 'scale-110');
   }
+
+  preloadVehicleFrames(activeVehicleId, activeColorId);
+  set360Frame(currentFrameIndex);
 };
 
-window.toggle3DAutoRotate = function() {
-  isStudioAutoRotating = !isStudioAutoRotating;
-  const btn = document.getElementById('autorotate-btn');
-  if (btn) {
-    if (isStudioAutoRotating) {
-      btn.classList.add('bg-[#013D93]', 'text-white');
-    } else {
-      btn.classList.remove('bg-[#013D93]', 'text-white');
+window.on360SliderScrub = function(val) {
+  if (is360AutoSpinning) stop360AutoSpin();
+  hideDragHint();
+  const v = VEHICLES_360[activeVehicleId];
+  if (!v) return;
+
+  const deg = parseInt(val, 10);
+  const targetFrame = Math.min(v.frameCount, Math.max(1, Math.round((deg / 360) * (v.frameCount - 1)) + 1));
+  set360Frame(targetFrame);
+};
+
+window.set360AnglePreset = function(targetDeg) {
+  if (is360AutoSpinning) stop360AutoSpin();
+  hideDragHint();
+  const v = VEHICLES_360[activeVehicleId];
+  if (!v) return;
+
+  const targetFrame = Math.min(v.frameCount, Math.max(1, Math.round((targetDeg / 360) * (v.frameCount - 1)) + 1));
+  
+  // Quick smooth rotational transition
+  const startF = currentFrameIndex;
+  const diff = targetFrame - startF;
+  const steps = 6;
+  let s = 0;
+  const animInterval = setInterval(() => {
+    s++;
+    const nextF = Math.round(startF + (diff * (s / steps)));
+    set360Frame(nextF);
+    if (s >= steps) {
+      clearInterval(animInterval);
+      set360Frame(targetFrame);
     }
+  }, 35);
+};
+
+window.toggle360AutoSpin = function() {
+  if (is360AutoSpinning) {
+    stop360AutoSpin();
+  } else {
+    start360AutoSpin();
   }
 };
 
-function onStudioResize() {
-  const container = document.getElementById('three-canvas-container');
-  if (!container || !renderer || !camera) return;
-
-  const width = container.clientWidth;
-  const height = container.clientHeight;
-  camera.aspect = width / height;
-  camera.updateProjectionMatrix();
-  renderer.setSize(width, height);
-}
-
-function animateStudio() {
-  requestAnimationFrame(animateStudio);
-
-  if (isStudioAutoRotating && bikeGroup) {
-    bikeGroup.rotation.y += 0.005;
+function start360AutoSpin() {
+  is360AutoSpinning = true;
+  hideDragHint();
+  const spinBtn = document.getElementById('v-spin-btn');
+  const spinText = document.getElementById('v-spin-text');
+  if (spinBtn) {
+    spinBtn.classList.remove('bg-slate-100', 'text-slate-800');
+    spinBtn.classList.add('bg-[#013D93]', 'text-white');
   }
+  if (spinText) spinText.textContent = 'Pause';
 
-  controls.update();
-  updateHotspotsPosition();
-  renderer.render(scene, camera);
+  autoSpinTimer = setInterval(() => {
+    const v = VEHICLES_360[activeVehicleId];
+    if (!v) return;
+    let nextFrame = currentFrameIndex + 1;
+    if (nextFrame > v.frameCount) nextFrame = 1;
+    set360Frame(nextFrame);
+  }, 110);
 }
+
+function stop360AutoSpin() {
+  is360AutoSpinning = false;
+  if (autoSpinTimer) {
+    clearInterval(autoSpinTimer);
+    autoSpinTimer = null;
+  }
+  const spinBtn = document.getElementById('v-spin-btn');
+  const spinText = document.getElementById('v-spin-text');
+  if (spinBtn) {
+    spinBtn.classList.remove('bg-[#013D93]', 'text-white');
+    spinBtn.classList.add('bg-slate-100', 'text-slate-800');
+  }
+  if (spinText) spinText.textContent = 'Auto Spin';
+}
+
+window.openTestRideModalFor360 = function() {
+  const v = VEHICLES_360[activeVehicleId];
+  if (v && typeof openTestRideModal === 'function') {
+    openTestRideModal(v.modelName);
+  }
+};
 
 // ----------------------------------------------------
 // 4. Interactive EMI & Loan Finance Calculator

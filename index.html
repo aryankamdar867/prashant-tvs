@@ -101,15 +101,15 @@
         <!-- Desktop Navigation Links -->
         <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold text-slate-600">
           <a href="#sales-catalog" class="hover:text-[#013D93] transition-colors">Bikes & Scooters</a>
-          <a href="#3d-experience" class="hover:text-[#013D93] transition-colors flex items-center gap-1.5">
+          <a href="#360-studio" class="hover:text-[#013D93] transition-colors flex items-center gap-1.5">
             <span class="w-2 h-2 rounded-full bg-[#D91D2F] animate-pulse"></span>
-            3D Studio
+            360° Studio
           </a>
           <a href="#workshop-service" class="hover:text-[#013D93] transition-colors">Authorised Service</a>
           <a href="#real-showroom" class="hover:text-[#013D93] transition-colors">Showroom Gallery</a>
           <a href="#finance-calculator" class="hover:text-[#013D93] transition-colors">EMI & Exchange</a>
           <a href="#reviews" class="hover:text-[#013D93] transition-colors">Reviews</a>
-          <a href="#location-contact" class="hover:text-[#013D93] transition-colors">Contact</a> <br><br>
+          <a href="#location-contact" class="hover:text-[#013D93] transition-colors">Contact</a>
         </nav>
 
         <!-- Right Quick Action CTAs -->
@@ -216,8 +216,9 @@
                 <p class="text-xs text-slate-300 mt-1">Ready stock of TVS Jupiter 125, Apache RTR 160 4V, Raider, and iQube Electric for immediate delivery.</p>
 
                 <div class="mt-3.5 flex items-center gap-2">
-                  <a href="#3d-experience" class="flex-1 py-2 px-3 rounded-lg bg-[#013D93] hover:bg-[#002D6E] text-white text-xs font-bold text-center transition-colors shadow">
-                    Launch 3D Bike Studio
+                  <a href="#360-studio" class="flex-1 py-2 px-3 rounded-lg bg-[#013D93] hover:bg-[#002D6E] text-white text-xs font-bold text-center transition-colors shadow flex items-center justify-center gap-1.5">
+                    <i data-lucide="rotate-3d" class="w-3.5 h-3.5"></i>
+                    <span>Launch 360° Studio</span>
                   </a>
                   <button onclick="openLightbox(0)" class="py-2 px-3 rounded-lg bg-white/20 hover:bg-white/30 backdrop-blur-md text-white text-xs font-bold transition-colors">
                     View Gallery
@@ -246,82 +247,195 @@
     </div>
   </section>
 
-  <!-- 3D INTERACTIVE STUDIO (Showcase Bike with Three.js WebGL & Hotspots) -->
-  <section id="3d-experience" class="py-16 bg-white border-y border-slate-200 relative">
+  <!-- INTERACTIVE 360° REAL VEHICLE ROTATING STUDIO -->
+  <section id="360-studio" class="py-16 bg-white border-y border-slate-200 relative overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+      <!-- Section Header & Model Selector Tabs -->
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
         <div>
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-[#013D93] text-xs font-bold border border-blue-200">
-            <i data-lucide="box" class="w-3.5 h-3.5"></i>
-            Interactive 3D Virtual Showroom
+            <i data-lucide="rotate-cw" class="w-3.5 h-3.5 text-[#013D93]"></i>
+            <span>Interactive 360° Real Vehicle Turntable</span>
           </div>
           <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mt-2 font-racing tracking-wide">
-            EXPLORE THE MACHINE IN 360°
+            EXPLORE REAL TVS VEHICLES IN 360°
           </h2>
-          <p class="text-sm text-slate-600 mt-1 max-w-xl">
-            Rotate, zoom, and inspect engineering highlights in full 3D. Click on numbered hotspots to discover race-tuned telemetry, Showa suspension, and RT-Fi combustion technology.
+          <p class="text-sm text-slate-600 mt-1 max-w-2xl">
+            Switch between real TVS showroom models, drag or scrub to rotate 360 degrees, preview factory paint editions, and inspect authentic engineering specifications.
           </p>
         </div>
 
-        <!-- Color Selector Swatches -->
-        <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200 flex items-center gap-3">
-          <span class="text-xs font-bold text-slate-700">Paint Finish:</span>
-          <div class="flex items-center gap-2">
-            <button onclick="set3DColor(0x013D93, 'TVS Royal Blue', this)" class="color-swatch-btn w-7 h-7 rounded-full bg-[#013D93] border-2 border-white ring-4 ring-[#013D93] scale-110 shadow transition-all" title="TVS Royal Blue"></button>
-            <button onclick="set3DColor(0xD91D2F, 'TVS Racing Red', this)" class="color-swatch-btn w-7 h-7 rounded-full bg-[#D91D2F] border-2 border-white shadow transition-all" title="TVS Racing Red"></button>
-            <button onclick="set3DColor(0x1E293B, 'Matte Stealth Black', this)" class="color-swatch-btn w-7 h-7 rounded-full bg-[#1E293B] border-2 border-white shadow transition-all" title="Matte Stealth Black"></button>
-            <button onclick="set3DColor(0xF1F5F9, 'Glacier Pearl White', this)" class="color-swatch-btn w-7 h-7 rounded-full bg-[#F1F5F9] border-2 border-slate-300 shadow transition-all" title="Glacier Pearl White"></button>
-            <button onclick="set3DColor(0xD97706, 'Golden Ochre', this)" class="color-swatch-btn w-7 h-7 rounded-full bg-[#D97706] border-2 border-white shadow transition-all" title="Golden Ochre"></button>
-          </div>
-          <span id="active-color-name" class="text-xs font-bold text-[#013D93] pl-1">TVS Royal Blue</span>
+        <!-- Vehicle Model Selector Tabs -->
+        <div class="flex items-center gap-1.5 p-1.5 bg-slate-100 rounded-2xl border border-slate-200 overflow-x-auto max-w-full">
+          <!-- Apache RTR 310 -->
+          <button id="vtab-apache_310" onclick="switch360Vehicle('apache_310', this)" class="vehicle-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold transition-all bg-[#013D93] text-white shadow-md flex items-center gap-2 whitespace-nowrap">
+            <span class="w-2 h-2 rounded-full bg-[#D91D2F]"></span>
+            <span>Apache RTR 310</span>
+          </button>
+          <!-- Raider 125 -->
+          <button id="vtab-raider_125" onclick="switch360Vehicle('raider_125', this)" class="vehicle-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold transition-all bg-transparent text-slate-700 hover:bg-white hover:shadow-sm flex items-center gap-2 whitespace-nowrap">
+            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+            <span>Raider 125</span>
+          </button>
+          <!-- Jupiter 110 -->
+          <button id="vtab-jupiter_110" onclick="switch360Vehicle('jupiter_110', this)" class="vehicle-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold transition-all bg-transparent text-slate-700 hover:bg-white hover:shadow-sm flex items-center gap-2 whitespace-nowrap">
+            <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+            <span>Jupiter 110</span>
+          </button>
+          <!-- Radeon 110 -->
+          <button id="vtab-radeon_110" onclick="switch360Vehicle('radeon_110', this)" class="vehicle-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold transition-all bg-transparent text-slate-700 hover:bg-white hover:shadow-sm flex items-center gap-2 whitespace-nowrap">
+            <span class="w-2 h-2 rounded-full bg-slate-800"></span>
+            <span>Radeon 110</span>
+          </button>
         </div>
       </div>
 
-      <!-- 3D WebGL Canvas Display Box -->
-      <div class="relative w-full h-[540px] sm:h-[620px] rounded-3xl overflow-hidden border border-slate-200 shadow-xl bg-slate-50">
+      <!-- Main Interactive Studio Display Box -->
+      <div class="relative w-full rounded-3xl overflow-hidden border border-slate-200 shadow-xl bg-gradient-to-b from-slate-50 via-white to-slate-100">
         
-        <!-- Three.js Canvas Container -->
-        <div id="three-canvas-container"></div>
+        <!-- Top Studio Bar: Vehicle Name, Colorway Picker, Auto-Spin Action -->
+        <div class="p-4 sm:p-5 border-b border-slate-200/80 bg-white/85 backdrop-blur-md flex flex-wrap items-center justify-between gap-4 z-20 relative">
+          <div class="flex items-center gap-3">
+            <div id="v-badge" class="px-2.5 py-1 rounded-full bg-red-50 text-[#D91D2F] border border-red-200 text-xs font-black uppercase tracking-wider">
+              Racing Flagship
+            </div>
+            <div>
+              <h3 id="v-title" class="text-lg sm:text-xl font-black text-slate-900">TVS Apache RTR 310</h3>
+              <p id="v-subtitle" class="text-xs text-slate-500">Dual-Channel Cornering ABS • 35.6 PS Track Brawler</p>
+            </div>
+          </div>
 
-        <!-- 3D Hotspots Overlay Container -->
-        <div id="three-hotspots-overlay" class="absolute inset-0 pointer-events-none [&>*]:pointer-events-auto"></div>
+          <!-- Color Swatches & Auto-Spin Action -->
+          <div class="flex items-center gap-3 sm:gap-4 flex-wrap">
+            <!-- Dynamic Color Swatches Container -->
+            <div class="flex items-center gap-2 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200">
+              <span class="text-xs font-bold text-slate-600 mr-1">Finish:</span>
+              <div id="v-color-swatches" class="flex items-center gap-2">
+                <!-- Color swatches injected dynamically via JS -->
+              </div>
+              <span id="v-color-name" class="text-xs font-bold text-[#013D93] ml-1.5">Arsenal Black</span>
+            </div>
 
-        <!-- Top Left Controls Bar -->
-        <div class="absolute top-4 left-4 z-10 flex flex-wrap items-center gap-2">
-          <button id="autorotate-btn" onclick="toggle3DAutoRotate()" class="px-3 py-1.5 rounded-xl bg-[#013D93] text-white text-xs font-bold shadow-md hover:bg-[#002D6E] transition-colors flex items-center gap-1.5">
-            <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i>
-            <span>360° Turntable</span>
-          </button>
-          <span class="text-[11px] font-medium text-slate-600 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-lg border border-slate-200">
-            Drag to Orbit • Pinch/Scroll to Zoom
-          </span>
-        </div>
-
-        <!-- Bottom Camera View Angle Presets -->
-        <div class="absolute bottom-4 left-4 z-10 hidden sm:flex items-center gap-2 bg-white/90 backdrop-blur-md p-1.5 rounded-xl border border-slate-200 shadow-md">
-          <span class="text-[11px] font-bold text-slate-700 px-2">Camera:</span>
-          <button onclick="set3DCameraPreset('profile')" class="px-2.5 py-1 text-xs font-semibold rounded-lg hover:bg-slate-100 text-slate-700">Side Profile</button>
-          <button onclick="set3DCameraPreset('front')" class="px-2.5 py-1 text-xs font-semibold rounded-lg hover:bg-slate-100 text-slate-700">Front Angle</button>
-          <button onclick="set3DCameraPreset('cockpit')" class="px-2.5 py-1 text-xs font-semibold rounded-lg hover:bg-slate-100 text-slate-700">Cockpit TFT</button>
-          <button onclick="set3DCameraPreset('engine')" class="px-2.5 py-1 text-xs font-semibold rounded-lg hover:bg-slate-100 text-slate-700">Engine RT-Fi</button>
-        </div>
-
-        <!-- Hotspot Detail Flyout Box -->
-        <div id="hotspot-info-card" class="absolute top-4 right-4 z-20 max-w-sm bg-white/95 backdrop-blur-md p-5 rounded-2xl border border-slate-200 shadow-2xl transition-all duration-300 opacity-0 pointer-events-none translate-y-4">
-          <div class="flex items-start justify-between gap-3">
-            <span class="px-2 py-0.5 rounded-full bg-blue-50 text-[#013D93] text-[10px] font-bold uppercase tracking-wider">Tech Spec</span>
-            <button onclick="closeHotspotDetail()" class="text-slate-400 hover:text-slate-600">
-              <i data-lucide="x" class="w-4 h-4"></i>
+            <!-- Auto-Spin Toggle -->
+            <button id="v-spin-btn" onclick="toggle360AutoSpin()" class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold border border-slate-200 shadow-sm transition-all flex items-center gap-1.5">
+              <i data-lucide="play" class="w-3.5 h-3.5 text-[#013D93]"></i>
+              <span id="v-spin-text">Auto Spin</span>
             </button>
           </div>
-          <h4 id="hotspot-title" class="text-base font-extrabold text-slate-900 mt-2"></h4>
-          <p id="hotspot-desc" class="text-xs text-slate-600 mt-1.5 leading-relaxed"></p>
-          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-            <span class="text-xs text-slate-500 font-medium">Standard on Apache series</span>
-            <button onclick="openTestRideModal('TVS Apache RTR 160 4V')" class="text-xs font-bold text-[#013D93] hover:text-[#002D6E] flex items-center gap-1">
-              Book Test Ride <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
-            </button>
+        </div>
+
+        <!-- Visual Turntable Stage Container -->
+        <div id="turntable-stage" class="relative w-full h-[380px] sm:h-[460px] lg:h-[500px] flex items-center justify-center select-none overflow-hidden cursor-grab active:cursor-grabbing">
+          
+          <!-- Radial Studio Lighting Background -->
+          <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white via-slate-50 to-slate-200/90 pointer-events-none"></div>
+
+          <!-- Turntable Floor Pedestal with TVS Cobalt & Crimson Rings -->
+          <div class="absolute bottom-8 sm:bottom-12 w-[340px] sm:w-[500px] md:w-[620px] h-[70px] sm:h-[95px] rounded-[50%] bg-gradient-to-b from-slate-200/80 to-slate-300/40 border border-slate-300 shadow-inner flex items-center justify-center pointer-events-none">
+            <div class="w-[92%] h-[85%] rounded-[50%] border-2 border-[#013D93]/40 flex items-center justify-center">
+              <div class="w-[84%] h-[78%] rounded-[50%] border border-[#D91D2F]/40 bg-gradient-to-t from-slate-100 to-white/95 shadow-md"></div>
+            </div>
+          </div>
+
+          <!-- Realistic Contact Shadow Under Vehicle Wheels -->
+          <div class="absolute bottom-12 sm:bottom-16 w-[300px] sm:w-[440px] md:w-[540px] h-[26px] sm:h-[34px] rounded-[50%] bg-slate-900/25 blur-md pointer-events-none"></div>
+
+          <!-- Real Vehicle 360 Image Canvas / Element -->
+          <div class="relative z-10 w-full h-full flex items-center justify-center p-4">
+            <img id="v-turntable-img" src="assets/vehicles/apache_310/arsenalblack/1.png" alt="TVS Apache RTR 310 360 View" class="max-w-[88%] max-h-[88%] sm:max-w-[78%] sm:max-h-[82%] object-contain drop-shadow-xl select-none pointer-events-none transition-opacity duration-75" />
+          </div>
+
+          <!-- Drag Interaction Helper Hint (Auto-fades on user drag) -->
+          <div id="v-drag-hint" class="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 pointer-events-none flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/85 backdrop-blur-md text-white text-xs font-semibold shadow-lg transition-opacity duration-500">
+            <i data-lucide="move-horizontal" class="w-4 h-4 text-sky-400 animate-pulse"></i>
+            <span>Drag horizontally or use slider to rotate 360°</span>
+          </div>
+
+          <!-- Degree Angle HUD Pill (Top Left of Stage) -->
+          <div class="absolute top-4 left-4 z-20 flex items-center gap-2 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-200 shadow-sm">
+            <i data-lucide="compass" class="w-3.5 h-3.5 text-[#013D93]"></i>
+            <span class="text-xs font-bold text-slate-700">Angle:</span>
+            <span id="v-angle-text" class="text-xs font-black text-[#D91D2F] font-mono">0°</span>
+          </div>
+
+          <!-- Tech Highlight Badge (Top Right of Stage) -->
+          <div class="absolute top-4 right-4 z-20 hidden sm:flex items-center gap-2 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-200 shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+            <span id="v-tech-text" class="text-xs font-bold text-slate-800">Bi-Directional Quickshifter & Cruise Control</span>
+          </div>
+
+          <!-- Loading Indicator Bar -->
+          <div id="v-loader" class="absolute inset-0 bg-white/60 backdrop-blur-sm z-30 flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-200">
+            <div class="w-8 h-8 border-3 border-blue-200 border-t-[#013D93] rounded-full animate-spin"></div>
+            <span class="text-xs font-bold text-slate-700 mt-2">Loading 360° High-Res Frames...</span>
+          </div>
+
+        </div>
+
+        <!-- Bottom Controls & Quick Angle Presets -->
+        <div class="p-4 sm:p-5 border-t border-slate-200/80 bg-white/90 backdrop-blur-md flex flex-col md:flex-row items-center justify-between gap-4 z-20 relative">
+          
+          <!-- Angle Quick Presets -->
+          <div class="flex items-center gap-1.5 flex-wrap">
+            <span class="text-xs font-bold text-slate-600 mr-1">Angle View:</span>
+            <button onclick="set360AnglePreset(0)" class="preset-angle-btn px-2.5 py-1 text-xs font-semibold rounded-lg bg-slate-100 hover:bg-[#013D93] hover:text-white transition-all text-slate-700">Front (0°)</button>
+            <button onclick="set360AnglePreset(45)" class="preset-angle-btn px-2.5 py-1 text-xs font-semibold rounded-lg bg-slate-100 hover:bg-[#013D93] hover:text-white transition-all text-slate-700">Front 3/4 (45°)</button>
+            <button onclick="set360AnglePreset(90)" class="preset-angle-btn px-2.5 py-1 text-xs font-semibold rounded-lg bg-slate-100 hover:bg-[#013D93] hover:text-white transition-all text-slate-700">Profile (90°)</button>
+            <button onclick="set360AnglePreset(180)" class="preset-angle-btn px-2.5 py-1 text-xs font-semibold rounded-lg bg-slate-100 hover:bg-[#013D93] hover:text-white transition-all text-slate-700">Rear (180°)</button>
+            <button onclick="set360AnglePreset(270)" class="preset-angle-btn px-2.5 py-1 text-xs font-semibold rounded-lg bg-slate-100 hover:bg-[#013D93] hover:text-white transition-all text-slate-700">Side (270°)</button>
+          </div>
+
+          <!-- 360° Radial Scrubber Range Slider -->
+          <div class="flex items-center gap-3 w-full md:w-72">
+            <i data-lucide="rotate-cw" class="w-4 h-4 text-slate-400 shrink-0"></i>
+            <input id="v-scrubber" type="range" min="0" max="360" value="0" class="w-full cursor-ew-resize accent-[#013D93]" oninput="on360SliderScrub(this.value)" />
+            <span class="text-xs font-mono font-bold text-slate-700 w-10 text-right" id="v-scrubber-val">0°</span>
+          </div>
+
+        </div>
+
+        <!-- Dynamic Live Specs HUD & Instant Test Ride Booking Bar -->
+        <div class="p-4 sm:p-6 bg-slate-50 border-t border-slate-200">
+          <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
+            
+            <div class="p-3 bg-white rounded-xl border border-slate-200 shadow-sm">
+              <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Engine</span>
+              <span id="spec-engine" class="text-sm font-extrabold text-slate-900 mt-0.5 block">312.12 cc</span>
+              <span id="spec-engine-sub" class="text-[10px] text-slate-500 block truncate">DOHC Liquid Cooled</span>
+            </div>
+
+            <div class="p-3 bg-white rounded-xl border border-slate-200 shadow-sm">
+              <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Max Power</span>
+              <span id="spec-power" class="text-sm font-extrabold text-[#D91D2F] mt-0.5 block">35.6 PS</span>
+              <span id="spec-power-sub" class="text-[10px] text-slate-500 block truncate">@ 9700 rpm</span>
+            </div>
+
+            <div class="p-3 bg-white rounded-xl border border-slate-200 shadow-sm">
+              <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Top Speed</span>
+              <span id="spec-speed" class="text-sm font-extrabold text-[#013D93] mt-0.5 block">150 km/h</span>
+              <span id="spec-speed-sub" class="text-[10px] text-slate-500 block truncate">0-60 in 2.81s</span>
+            </div>
+
+            <div class="p-3 bg-white rounded-xl border border-slate-200 shadow-sm">
+              <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Fuel Mileage</span>
+              <span id="spec-mileage" class="text-sm font-extrabold text-emerald-600 mt-0.5 block">30 - 32 kmpl</span>
+              <span id="spec-mileage-sub" class="text-[10px] text-slate-500 block truncate">RT-Fi Telemetry</span>
+            </div>
+
+            <div class="p-3 bg-white rounded-xl border border-slate-200 shadow-sm">
+              <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Est. Pune Price</span>
+              <span id="spec-price" class="text-sm font-extrabold text-slate-900 mt-0.5 block">₹ 2,86,500*</span>
+              <span class="text-[10px] text-slate-500 block">Bibwewadi On-Road</span>
+            </div>
+
+            <div class="col-span-2 sm:col-span-4 lg:col-span-1 flex items-center">
+              <button id="v-testride-btn" onclick="openTestRideModalFor360()" class="w-full py-3 px-3 bg-[#013D93] hover:bg-[#002D6E] text-white text-xs font-bold rounded-xl shadow-md transition-all flex items-center justify-center gap-1.5">
+                <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+                <span>Book Test Ride</span>
+              </button>
+            </div>
+
           </div>
         </div>
 
