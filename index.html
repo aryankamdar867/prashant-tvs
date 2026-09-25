@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prashant TVS | Official Authorised TVS Two-Wheeler Showroom & Service | Bibwewadi, Pune</title>
+  <meta name="description" content="Official Authorised TVS Dealership in Bibwewadi, Pune. Explore & book TVS Apache, Jupiter, Raider, Ntorq, iQube EV. Certified workshop, genuine spares & doorstep service." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/logo/prashant_tvs_logo_cropped.png" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            tvs: {
+              blue: '#013D93',       // Official TVS Royal Cobalt Blue
+              bluehover: '#002D6E',
+              bluelight: '#EBF3FF',
+              red: '#D91D2F',        // Official TVS Pegasus Crimson Red
+              redhover: '#BA1323',
+              dark: '#0F172A',       // Luxury Dark Slate
+              body: '#334155',
+              muted: '#64748B'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts & Custom CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Three.js & OrbitControls -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- GSAP & Canvas Confetti -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-[#013D93] selection:text-white">
+
+  <!-- Top Announcement Bar (Refined Dark Slate with Crisp Accents) -->
+  <div class="bg-slate-900 text-slate-200 text-xs py-2 px-4 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div class="flex items-center gap-3 flex-wrap justify-center sm:justify-start">
+        <span class="inline-flex items-center gap-1.5 font-bold text-red-400">
+          <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+          AUTHORISED TVS DEALERSHIP
+        </span>
+        <span class="text-slate-600 hidden md:inline">•</span>
+        <span class="text-slate-300 font-medium">Swami Vivekanand Rd, Bibwewadi, Pune (Opp. ESIC Office)</span>
+        <span class="text-slate-600 hidden md:inline">•</span>
+        <span class="text-emerald-400 font-semibold">Open Today: 9:30 AM – 8:30 PM</span>
+      </div>
+
+      <div class="flex items-center gap-4 text-xs">
+        <a href="https://www.google.com/search?q=prashant+tvs" target="_blank" class="flex items-center gap-1 hover:text-amber-400 transition-colors">
+          <span class="text-amber-400 font-black">★ 4.2</span>
+          <span class="text-slate-300">(62+ Google Reviews)</span>
+        </a>
+        <a href="tel:08459101990" class="flex items-center gap-1.5 font-bold text-white hover:text-red-400 transition-colors">
+          <i data-lucide="phone-call" class="w-3.5 h-3.5 text-red-500"></i>
+          <span>084591 01990</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Subtle TVS Racing Divider -->
+  <div class="tvs-racing-line"></div>
+
+  <!-- Header & Navigation -->
+  <header class="sticky top-0 z-40 glass-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Official Prashant TVS Logo -->
+        <a href="#" class="flex items-center gap-3 group py-2">
+          <img 
+            src="assets/logo/prashant_tvs_logo_cropped.png" 
+            alt="Prashant TVS Official Logo" 
+            class="h-11 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
+          />
+          <div class="hidden xl:block border-l border-slate-200 pl-3">
+            <span class="text-[10px] font-extrabold uppercase tracking-wider text-[#013D93] block">Authorised Dealer</span>
+            <span class="text-[11px] font-semibold text-slate-500">Bibwewadi • Pune</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold text-slate-600">
+          <a href="#sales-catalog" class="hover:text-[#013D93] transition-colors">Bikes & Scooters</a>
+          <a href="#3d-experience" class="hover:text-[#013D93] transition-colors flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-[#D91D2F] animate-pulse"></span>
+            3D Studio
+          </a>
+          <a href="#workshop-service" class="hover:text-[#013D93] transition-colors">Authorised Service</a>
+          <a href="#real-showroom" class="hover:text-[#013D93] transition-colors">Showroom Gallery</a>
+          <a href="#finance-calculator" class="hover:text-[#013D93] transition-colors">EMI & Exchange</a>
+          <a href="#reviews" class="hover:text-[#013D93] transition-colors">Reviews</a>
+          <a href="#location-contact" class="hover:text-[#013D93] transition-colors">Contact</a> <br><br>
+        </nav>
+
+        <!-- Right Quick Action CTAs -->
+        <div class="flex items-center gap-3">
+          <button onclick="openTestRideModal()" class="hidden sm:inline-flex items-center gap-4 px-1 py-2.5 rounded-xl bg-[#013D93] hover:bg-[#002D6E] text-white text-xs font-bold shadow-md shadow-[#013D93]/20 hover:shadow-lg transition-all">
+            <i data-lucide="zap" class="w-4 h-4 text-amber-300"></i>
+            Book Test Ride
+          </button>
+          <a href="tel:08459101990" class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors" title="Call Showroom">
+            <i data-lucide="phone" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section (Light, Premium Luxury Automotive Design) -->
+  <section class="relative pt-10 pb-16 overflow-hidden bg-gradient-to-b from-white via-slate-50 to-slate-100/70">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Hero Content -->
+        <div class="lg:col-span-7 space-y-6 hero-content">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm text-xs font-bold text-slate-800">
+            <span class="px-2 py-0.5 rounded-full bg-[#013D93] text-white text-[10px] uppercase tracking-wider font-extrabold">Authorised TVS</span>
+            <span>Sales & Service Hub • Bibwewadi, Pune</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl xl:text-6xl font-black text-slate-900 tracking-tight leading-[1.14]">
+            Your Next TVS Machine, <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#013D93] via-[#013D93] to-[#D91D2F] font-racing">Delivered in Pune</span>.
+          </h1>
+
+          <p class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl font-normal">
+            Welcome to <strong class="text-slate-900 font-bold">Prashant TVS (Prashant Auto)</strong> — Pune’s authorized destination for the entire lineup of TVS Motorcycles & Scooters. Experience race-bred Apache performance, family-friendly Jupiters, easy finance pre-approval, and factory-certified service care.
+          </p>
+
+          <!-- Core Call to Action Buttons -->
+          <div class="flex flex-wrap items-center gap-3.5 pt-2">
+            <a href="#sales-catalog" class="px-6 py-3.5 rounded-xl bg-[#013D93] hover:bg-[#002D6E] text-white text-sm font-bold shadow-md shadow-[#013D93]/25 hover:shadow-lg transition-all flex items-center gap-2">
+              <i data-lucide="compass" class="w-4 h-4"></i>
+              Explore Bikes & Scooters
+            </a>
+
+            <button onclick="openTestRideModal()" class="px-6 py-3.5 rounded-xl bg-[#D91D2F] hover:bg-[#BA1323] text-white text-sm font-bold shadow-md shadow-[#D91D2F]/25 hover:shadow-lg transition-all flex items-center gap-2">
+              <i data-lucide="key" class="w-4 h-4"></i>
+              Book Doorstep Test Ride
+            </button>
+
+            <a href="#workshop-service" class="px-5 py-3.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 text-sm font-bold shadow-sm transition-all flex items-center gap-2">
+              <i data-lucide="wrench" class="w-4 h-4 text-[#013D93]"></i>
+              Workshop Service
+            </a>
+          </div>
+
+          <!-- Credibility Stats Grid -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-slate-200">
+            <div class="p-3.5 bg-white rounded-xl border border-slate-200 shadow-sm">
+              <div class="flex items-center gap-1 text-amber-500 font-black text-lg">
+                <span>★ 4.2</span>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+              </div>
+              <p class="text-[11px] text-slate-500 font-medium mt-0.5">62+ Google Reviews</p>
+            </div>
+
+            <div class="p-3.5 bg-white rounded-xl border border-slate-200 shadow-sm">
+              <span class="text-[#013D93] font-black text-lg">15,000+</span>
+              <p class="text-[11px] text-slate-500 font-medium mt-0.5">Pune Riders Served</p>
+            </div>
+
+            <div class="p-3.5 bg-white rounded-xl border border-slate-200 shadow-sm">
+              <span class="text-slate-900 font-black text-lg">100%</span>
+              <p class="text-[11px] text-slate-500 font-medium mt-0.5">Genuine TVS Spares</p>
+            </div>
+
+            <div class="p-3.5 bg-white rounded-xl border border-slate-200 shadow-sm">
+              <span class="text-emerald-600 font-black text-lg">60 Min</span>
+              <p class="text-[11px] text-slate-500 font-medium mt-0.5">Express Maintenance</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Hero Visual Showcase -->
+        <div class="lg:col-span-5 relative">
+          <div class="relative rounded-3xl overflow-hidden bg-white p-2 shadow-xl border border-slate-200 group">
+            <div class="relative h-[430px] rounded-2xl overflow-hidden bg-slate-100">
+              <img src="assets/showroom/showroom_front.jpg" alt="Prashant TVS Showroom Bibwewadi Front Display" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-transparent to-transparent"></div>
+
+              <!-- Top Floating Badge -->
+              <div class="absolute top-4 left-4 right-4 flex items-center justify-between">
+                <span class="px-3 py-1.5 rounded-full bg-white/95 backdrop-blur-md text-xs font-bold text-[#013D93] shadow-md flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-[#D91D2F]"></span>
+                  Bibwewadi Showroom
+                </span>
+                <span class="px-3 py-1.5 rounded-full bg-slate-900/90 backdrop-blur-md text-xs font-bold text-white shadow-md">
+                  Sales & Workshop Hub
+                </span>
+              </div>
+
+              <!-- Bottom Content Overlay -->
+              <div class="absolute bottom-4 left-4 right-4 text-white">
+                <p class="text-xs font-bold text-red-400 uppercase tracking-wider">Swami Vivekanand Road • Opp. ESIC Office</p>
+                <h3 class="text-lg font-bold text-white mt-0.5">Full Two Wheeler Inventory On Display</h3>
+                <p class="text-xs text-slate-300 mt-1">Ready stock of TVS Jupiter 125, Apache RTR 160 4V, Raider, and iQube Electric for immediate delivery.</p>
+
+                <div class="mt-3.5 flex items-center gap-2">
+                  <a href="#3d-experience" class="flex-1 py-2 px-3 rounded-lg bg-[#013D93] hover:bg-[#002D6E] text-white text-xs font-bold text-center transition-colors shadow">
+                    Launch 3D Bike Studio
+                  </a>
+                  <button onclick="openLightbox(0)" class="py-2 px-3 rounded-lg bg-white/20 hover:bg-white/30 backdrop-blur-md text-white text-xs font-bold transition-colors">
+                    View Gallery
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floating Customer Review Pill (Safely positioned inside card) -->
+          <div class="absolute bottom-4 left-4 z-20 bg-white/95 backdrop-blur-md p-3.5 rounded-2xl border border-slate-200 shadow-xl max-w-[280px] sm:max-w-xs hidden sm:flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-blue-50 text-[#013D93] font-black flex items-center justify-center shrink-0">
+              AK
+            </div>
+            <div>
+              <div class="flex items-center gap-1 text-amber-400 text-xs">
+                ★★★★★
+              </div>
+              <p class="text-xs font-bold text-slate-800 line-clamp-1">"Amazing service, timely customer support!"</p>
+              <p class="text-[10px] text-slate-500">Aryan Kamdar • Google Reviewer</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 3D INTERACTIVE STUDIO (Showcase Bike with Three.js WebGL & Hotspots) -->
+  <section id="3d-experience" class="py-16 bg-white border-y border-slate-200 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-[#013D93] text-xs font-bold border border-blue-200">
+            <i data-lucide="box" class="w-3.5 h-3.5"></i>
+            Interactive 3D Virtual Showroom
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mt-2 font-racing tracking-wide">
+            EXPLORE THE MACHINE IN 360°
+          </h2>
+          <p class="text-sm text-slate-600 mt-1 max-w-xl">
+            Rotate, zoom, and inspect engineering highlights in full 3D. Click on numbered hotspots to discover race-tuned telemetry, Showa suspension, and RT-Fi combustion technology.
+          </p>
+        </div>
+
+        <!-- Color Selector Swatches -->
+        <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200 flex items-center gap-3">
+          <span class="text-xs font-bold text-slate-700">Paint Finish:</span>
+          <div class="flex items-center gap-2">
+            <button onclick="set3DColor(0x013D93, 'TVS Royal Blue', this)" class="color-swatch-btn w-7 h-7 rounded-full bg-[#013D93] border-2 border-white ring-4 ring-[#013D93] scale-110 shadow transition-all" title="TVS Royal Blue"></button>
+            <button onclick="set3DColor(0xD91D2F, 'TVS Racing Red', this)" class="color-swatch-btn w-7 h-7 rounded-full bg-[#D91D2F] border-2 border-white shadow transition-all" title="TVS Racing Red"></button>
+            <button onclick="set3DColor(0x1E293B, 'Matte Stealth Black', this)" class="color-swatch-btn w-7 h-7 rounded-full bg-[#1E293B] border-2 border-white shadow transition-all" title="Matte Stealth Black"></button>
+            <button onclick="set3DColor(0xF1F5F9, 'Glacier Pearl White', this)" class="color-swatch-btn w-7 h-7 rounded-full bg-[#F1F5F9] border-2 border-slate-300 shadow transition-all" title="Glacier Pearl White"></button>
+            <button onclick="set3DColor(0xD97706, 'Golden Ochre', this)" class="color-swatch-btn w-7 h-7 rounded-full bg-[#D97706] border-2 border-white shadow transition-all" title="Golden Ochre"></button>
+          </div>
+          <span id="active-color-name" class="text-xs font-bold text-[#013D93] pl-1">TVS Royal Blue</span>
+        </div>
+      </div>
+
+      <!-- 3D WebGL Canvas Display Box -->
+      <div class="relative w-full h-[540px] sm:h-[620px] rounded-3xl overflow-hidden border border-slate-200 shadow-xl bg-slate-50">
+        
+        <!-- Three.js Canvas Container -->
+        <div id="three-canvas-container"></div>
+
+        <!-- 3D Hotspots Overlay Container -->
+        <div id="three-hotspots-overlay" class="absolute inset-0 pointer-events-none [&>*]:pointer-events-auto"></div>
+
+        <!-- Top Left Controls Bar -->
+        <div class="absolute top-4 left-4 z-10 flex flex-wrap items-center gap-2">
+          <button id="autorotate-btn" onclick="toggle3DAutoRotate()" class="px-3 py-1.5 rounded-xl bg-[#013D93] text-white text-xs font-bold shadow-md hover:bg-[#002D6E] transition-colors flex items-center gap-1.5">
+            <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i>
+            <span>360° Turntable</span>
+          </button>
+          <span class="text-[11px] font-medium text-slate-600 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-lg border border-slate-200">
+            Drag to Orbit • Pinch/Scroll to Zoom
+          </span>
+        </div>
+
+        <!-- Bottom Camera View Angle Presets -->
+        <div class="absolute bottom-4 left-4 z-10 hidden sm:flex items-center gap-2 bg-white/90 backdrop-blur-md p-1.5 rounded-xl border border-slate-200 shadow-md">
+          <span class="text-[11px] font-bold text-slate-700 px-2">Camera:</span>
+          <button onclick="set3DCameraPreset('profile')" class="px-2.5 py-1 text-xs font-semibold rounded-lg hover:bg-slate-100 text-slate-700">Side Profile</button>
+          <button onclick="set3DCameraPreset('front')" class="px-2.5 py-1 text-xs font-semibold rounded-lg hover:bg-slate-100 text-slate-700">Front Angle</button>
+          <button onclick="set3DCameraPreset('cockpit')" class="px-2.5 py-1 text-xs font-semibold rounded-lg hover:bg-slate-100 text-slate-700">Cockpit TFT</button>
+          <button onclick="set3DCameraPreset('engine')" class="px-2.5 py-1 text-xs font-semibold rounded-lg hover:bg-slate-100 text-slate-700">Engine RT-Fi</button>
+        </div>
+
+        <!-- Hotspot Detail Flyout Box -->
+        <div id="hotspot-info-card" class="absolute top-4 right-4 z-20 max-w-sm bg-white/95 backdrop-blur-md p-5 rounded-2xl border border-slate-200 shadow-2xl transition-all duration-300 opacity-0 pointer-events-none translate-y-4">
+          <div class="flex items-start justify-between gap-3">
+            <span class="px-2 py-0.5 rounded-full bg-blue-50 text-[#013D93] text-[10px] font-bold uppercase tracking-wider">Tech Spec</span>
+            <button onclick="closeHotspotDetail()" class="text-slate-400 hover:text-slate-600">
+              <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+          </div>
+          <h4 id="hotspot-title" class="text-base font-extrabold text-slate-900 mt-2"></h4>
+          <p id="hotspot-desc" class="text-xs text-slate-600 mt-1.5 leading-relaxed"></p>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-xs text-slate-500 font-medium">Standard on Apache series</span>
+            <button onclick="openTestRideModal('TVS Apache RTR 160 4V')" class="text-xs font-bold text-[#013D93] hover:text-[#002D6E] flex items-center gap-1">
+              Book Test Ride <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TWO WHEELER SHOWROOM SALES CATALOG (Core Sales Focus) -->
+  <section id="sales-catalog" class="py-16 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-[#013D93] text-xs font-bold border border-blue-200">
+          <i data-lucide="award" class="w-3.5 h-3.5"></i>
+          Authorised TVS Sales Showroom
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mt-2 font-racing tracking-wide">
+          NEW TWO WHEELERS ON SALE IN BIBWEWADI
+        </h2>
+        <p class="text-sm text-slate-600 mt-2">
+          Pick your ideal machine with instant loan sanction, exchange bonus up to ₹5,000, and genuine factory warranty from Prashant TVS.
+        </p>
+
+        <!-- Catalog Filter Tabs -->
+        <div class="flex items-center justify-center flex-wrap gap-2 mt-6">
+          <button onclick="filterCatalog('all', this)" class="catalog-tab px-4 py-2 rounded-xl text-xs font-bold bg-[#013D93] text-white shadow-md transition-all">
+            All Two Wheelers
+          </button>
+          <button onclick="filterCatalog('racing', this)" class="catalog-tab px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 transition-all">
+            Apache Racing Series
+          </button>
+          <button onclick="filterCatalog('scooters', this)" class="catalog-tab px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 transition-all">
+            Jupiter & Ntorq Scooters
+          </button>
+          <button onclick="filterCatalog('commuter', this)" class="catalog-tab px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 transition-all">
+            Raider & Ronin Commuters
+          </button>
+          <button onclick="filterCatalog('electric', this)" class="catalog-tab px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 transition-all">
+            iQube Smart Electric
+          </button>
+          <button onclick="filterCatalog('utility', this)" class="catalog-tab px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 transition-all">
+            XL100 Heavy Duty
+          </button>
+        </div>
+      </div>
+
+      <!-- Dynamic Catalog Grid -->
+      <div id="catalog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+
+    </div>
+  </section>
+
+  <!-- REAL SHOWROOM & DELIVERY FACILITY SHOWCASE (Photos provided by user) -->
+  <section id="real-showroom" class="py-16 bg-white border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-[#013D93]">Authentic Infrastructure</span>
+          <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mt-1 font-racing tracking-wide">
+            INSIDE PRASHANT TVS BIBWEWADI
+          </h2>
+          <p class="text-sm text-slate-600 mt-1 max-w-xl">
+            Step into our Swami Vivekanand Road dealership. Take a look at our illuminated display avenue, air-conditioned customer lounge, and vehicle handover readiness yard.
+          </p>
+        </div>
+
+        <a href="https://maps.google.com/?q=Prashant+Auto+Bibwewadi+Pune" target="_blank" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold transition-colors">
+          <i data-lucide="navigation" class="w-4 h-4 text-[#D91D2F]"></i>
+          Get Live Directions on Google Maps
+        </a>
+      </div>
+
+      <!-- Gallery Grid of User Uploaded Photos -->
+      <div id="gallery-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+
+    </div>
+  </section>
+
+  <!-- AUTHORISED TVS WORKSHOP, SERVICE & SPARES SECTION -->
+  <section id="workshop-service" class="py-16 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left: Service Highlights -->
+        <div class="lg:col-span-6 space-y-6">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-[#013D93] text-xs font-bold border border-blue-200">
+            <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+            TVS Factory Certified Care
+          </div>
+
+          <h2 class="text-3xl sm:text-4xl font-black text-slate-900 font-racing tracking-wide leading-tight">
+            EXPERT TVS SERVICING & 100% GENUINE SPARE PARTS
+          </h2>
+
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Your TVS bike deserves certified precision. At Prashant Auto Bibwewadi, our TVS Motor Company trained technicians utilize factory diagnostic computers, pneumatic lift bays, and 100% genuine TRU4 lubricants to ensure maximum engine longevity and peak fuel efficiency.
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+            <div class="p-4 rounded-xl bg-white border border-slate-200 shadow-sm flex items-start gap-3">
+              <div class="w-9 h-9 rounded-lg bg-red-50 text-[#D91D2F] flex items-center justify-center shrink-0">
+                <i data-lucide="check-circle" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h4 class="text-sm font-bold text-slate-900">Genuine TVS Spares</h4>
+                <p class="text-xs text-slate-500 mt-0.5">OEM brake pads, filters, spark plugs & TRU4 synthetic engine oil.</p>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-white border border-slate-200 shadow-sm flex items-start gap-3">
+              <div class="w-9 h-9 rounded-lg bg-blue-50 text-[#013D93] flex items-center justify-center shrink-0">
+                <i data-lucide="clock" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h4 class="text-sm font-bold text-slate-900">60-Min Express Service</h4>
+                <p class="text-xs text-slate-500 mt-0.5">Quick lube, wash, and brake check while you relax in our AC lounge.</p>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-white border border-slate-200 shadow-sm flex items-start gap-3">
+              <div class="w-9 h-9 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                <i data-lucide="truck" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h4 class="text-sm font-bold text-slate-900">Doorstep Pick & Drop</h4>
+                <p class="text-xs text-slate-500 mt-0.5">Serving Bibwewadi, Salisbury Park, Market Yard, Katraj & Swargate.</p>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-white border border-slate-200 shadow-sm flex items-start gap-3">
+              <div class="w-9 h-9 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+                <i data-lucide="file-badge" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h4 class="text-sm font-bold text-slate-900">Insurance Cashless Claims</h4>
+                <p class="text-xs text-slate-500 mt-0.5">Tie-ups with leading insurers for hassle-free accidental repair.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Job-Card Status Checker Simulation -->
+          <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-1.5">
+              <i data-lucide="search" class="w-3.5 h-3.5 text-[#013D93]"></i>
+              Live Service Job-Card Status Tracker
+            </h4>
+            <form id="service-tracker-form" class="flex gap-2">
+              <input type="text" id="tracker-reg-num" placeholder="e.g. MH 12 AB 1234" class="flex-1 px-3 py-2 rounded-lg border border-slate-200 text-xs font-semibold uppercase focus:outline-none focus:border-[#013D93]" required />
+              <button type="submit" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-bold transition-colors">
+                Track Status
+              </button>
+            </form>
+
+            <div id="tracker-result-card" class="mt-3 p-3 rounded-lg bg-emerald-50 border border-emerald-200 hidden">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-bold text-slate-900" id="tracker-display-reg">MH 12 AB 1234</span>
+                <span class="px-2 py-0.5 bg-emerald-200 text-emerald-800 font-bold rounded" id="tracker-status-tag">Ready for Delivery</span>
+              </div>
+              <p class="text-xs text-emerald-800 mt-1 font-medium" id="tracker-step-title">Periodic Maintenance & Foam Wash Completed</p>
+              <p class="text-[10px] text-slate-600 mt-0.5" id="tracker-tech-name">Advisor: Sunil Jadhav (Master Technician)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Instant Service Booking Card -->
+        <div class="lg:col-span-6">
+          <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xl">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+              <div>
+                <h3 class="text-xl font-bold text-slate-900">Schedule Service Appointment</h3>
+                <p class="text-xs text-slate-500">Fast-track slot booking with zero counter waiting</p>
+              </div>
+              <span class="w-3 h-3 rounded-full bg-emerald-500 animate-ping"></span>
+            </div>
+
+            <form onsubmit="handleServiceBookingSubmit(event)" class="space-y-4 mt-5">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Full Name</label>
+                  <input type="text" id="sb-name" placeholder="Aryan Kamdar" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-[#013D93] focus:outline-none" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Contact Phone</label>
+                  <input type="tel" id="sb-phone" placeholder="98XXXXXXXX" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-[#013D93] focus:outline-none" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Your TVS Two-Wheeler</label>
+                  <select id="sb-vehicle" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-medium focus:ring-2 focus:ring-[#013D93] focus:outline-none">
+                    <option>TVS Jupiter 125 / 110</option>
+                    <option>TVS Apache RTR 160 4V / 200</option>
+                    <option>TVS Ntorq 125</option>
+                    <option>TVS Raider 125</option>
+                    <option>TVS iQube Electric</option>
+                    <option>TVS Ronin 225</option>
+                    <option>TVS XL100</option>
+                    <option>Other TVS Model</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Service Required</label>
+                  <select id="sb-service-type" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-medium focus:ring-2 focus:ring-[#013D93] focus:outline-none">
+                    <option>Periodic Free / Paid Maintenance</option>
+                    <option>Engine Oil Change & Filter Replacement</option>
+                    <option>Brake & Suspension Inspection</option>
+                    <option>Electrical / Battery Diagnostics</option>
+                    <option>Accidental Insurance Repair</option>
+                    <option>Full Teflon Polish & Foam Wash</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Preferred Date</label>
+                  <input type="date" id="sb-date" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-[#013D93] focus:outline-none" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Service Mode</label>
+                  <select class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-medium focus:ring-2 focus:ring-[#013D93] focus:outline-none">
+                    <option>Direct Visit to Bibwewadi Workshop</option>
+                    <option>Doorstep Pick-Up & Drop (Bibwewadi Area)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Any specific complaints or sounds? (Optional)</label>
+                <textarea rows="2" placeholder="e.g. Mild vibration at 40 km/h or rear brake pad sound..." class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-[#013D93] focus:outline-none"></textarea>
+              </div>
+
+              <button type="submit" class="w-full py-3.5 rounded-xl bg-[#013D93] hover:bg-[#002D6E] text-white font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2">
+                <i data-lucide="calendar-check" class="w-4 h-4"></i>
+                Confirm Service Slot & WhatsApp Reminder
+              </button>
+
+              <p class="text-[11px] text-center text-slate-400">
+                Authorised service centre opens at 9:00 AM • Instant confirmation sent to WhatsApp
+              </p>
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- INTERACTIVE FINANCIAL TOOLS (EMI Calculator & Exchange Value Estimator) -->
+  <section id="finance-calculator" class="py-16 bg-white border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-bold uppercase tracking-wider text-[#013D93]">Smart Financial Solutions</span>
+        <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mt-1 font-racing tracking-wide">
+          EMI CALCULATOR & BIKE EXCHANGE
+        </h2>
+        <p class="text-sm text-slate-600 mt-1">
+          Calculate your monthly installment with zero hidden charges or get an immediate valuation for your old two-wheeler.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Left: Interactive EMI Calculator -->
+        <div class="lg:col-span-7 bg-slate-50 p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm">
+          <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-200">
+            <div>
+              <h3 class="text-lg font-bold text-slate-900">Loan & EMI Simulator</h3>
+              <p class="text-xs text-slate-500">Official finance partners: TVS Credit, HDFC, IDFC First</p>
+            </div>
+            <span class="px-2.5 py-1 bg-blue-50 text-[#013D93] text-xs font-bold rounded-lg border border-blue-200">Low 6.99% Interest</span>
+          </div>
+
+          <div class="space-y-6">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Select Two-Wheeler Model</label>
+              <select id="calc-vehicle-select" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-xs font-semibold focus:outline-none focus:border-[#013D93]"></select>
+            </div>
+
+            <!-- Downpayment Slider -->
+            <div>
+              <div class="flex justify-between items-center text-xs mb-2">
+                <span class="font-bold text-slate-700">Down Payment</span>
+                <span id="label-downpayment" class="font-bold text-[#013D93]">20%</span>
+              </div>
+              <input type="range" id="calc-downpayment" min="5" max="60" value="20" step="5" />
+              <div class="flex justify-between text-[10px] text-slate-400 mt-1 font-medium">
+                <span>Min 5%</span>
+                <span>30%</span>
+                <span>Max 60%</span>
+              </div>
+            </div>
+
+            <!-- Tenure Slider -->
+            <div>
+              <div class="flex justify-between items-center text-xs mb-2">
+                <span class="font-bold text-slate-700">Loan Tenure</span>
+                <span id="label-tenure" class="font-bold text-[#013D93]">24 Months</span>
+              </div>
+              <input type="range" id="calc-tenure" min="12" max="48" value="24" step="6" />
+              <div class="flex justify-between text-[10px] text-slate-400 mt-1 font-medium">
+                <span>12 Mos (1 Yr)</span>
+                <span>24 Mos (2 Yrs)</span>
+                <span>36 Mos (3 Yrs)</span>
+                <span>48 Mos (4 Yrs)</span>
+              </div>
+            </div>
+
+            <!-- Interest Rate Slider -->
+            <div>
+              <div class="flex justify-between items-center text-xs mb-2">
+                <span class="font-bold text-slate-700">Annual Interest Rate</span>
+                <span id="label-interest" class="font-bold text-[#013D93]">7.99% p.a.</span>
+              </div>
+              <input type="range" id="calc-interest" min="6.5" max="13.5" value="7.99" step="0.25" />
+            </div>
+
+            <!-- Results Summary Card -->
+            <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+              <div>
+                <span class="text-[11px] text-slate-500 block">Monthly EMI</span>
+                <span id="calc-emi-result" class="text-xl font-black text-[#013D93]">₹ 5,340</span>
+              </div>
+              <div>
+                <span class="text-[11px] text-slate-500 block">Loan Principal</span>
+                <span id="calc-principal-result" class="text-sm font-bold text-slate-800">₹ 1,18,560</span>
+              </div>
+              <div>
+                <span class="text-[11px] text-slate-500 block">Total Interest</span>
+                <span id="calc-interest-result" class="text-sm font-bold text-slate-800">₹ 9,600</span>
+              </div>
+              <div>
+                <span class="text-[11px] text-slate-500 block">Total Payable</span>
+                <span id="calc-total-result" class="text-sm font-bold text-slate-800">₹ 1,57,800</span>
+              </div>
+            </div>
+
+            <button onclick="openTestRideModal()" class="w-full py-3 bg-[#013D93] hover:bg-[#002D6E] text-white rounded-xl text-xs font-bold shadow transition-colors flex items-center justify-center gap-1.5">
+              <i data-lucide="check" class="w-4 h-4"></i>
+              Apply for Instant Loan Pre-Approval
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: Old Bike Exchange Estimator -->
+        <div class="lg:col-span-5 bg-slate-50 p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4 pb-4 border-b border-slate-200">
+              <div>
+                <h3 class="text-lg font-bold text-slate-900">Old Bike Exchange</h3>
+                <p class="text-xs text-slate-500">Trade-in any brand for a brand new TVS</p>
+              </div>
+              <span class="px-2.5 py-1 bg-emerald-50 text-emerald-800 text-xs font-bold rounded-lg border border-emerald-200">₹5,000 Bonus</span>
+            </div>
+
+            <form id="exchange-calc-form" class="space-y-3.5">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Current Two-Wheeler Brand</label>
+                <select id="ex-brand" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs font-semibold focus:outline-none">
+                  <option value="hero">Hero MotoCorp (Splendor / Passion / Maestro)</option>
+                  <option value="honda">Honda (Activa / Shine / Dio / Unicorn)</option>
+                  <option value="bajaj">Bajaj (Pulsar / Platina / Discover)</option>
+                  <option value="yamaha">Yamaha (FZ / RayZR / Fascino / R15)</option>
+                  <option value="suzuki">Suzuki (Access / Burgman / Gixxer)</option>
+                  <option value="tvs">TVS (Old Jupiter / Apache / Scooty)</option>
+                </select>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Registration Year</label>
+                  <select id="ex-year" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs font-semibold focus:outline-none">
+                    <option value="2024">2024</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                    <option value="2020">2020</option>
+                    <option value="2018">2018 or older</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Kilometers Driven</label>
+                  <select id="ex-km" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs font-semibold focus:outline-none">
+                    <option value="15000">Under 15,000 km</option>
+                    <option value="30000">15,000 - 35,000 km</option>
+                    <option value="50000">35,000 - 60,000 km</option>
+                    <option value="75000">Above 60,000 km</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Vehicle Physical Condition</label>
+                <select id="ex-condition" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs font-semibold focus:outline-none">
+                  <option value="excellent">Excellent (Scratch-free, regularly serviced)</option>
+                  <option value="average">Good / Average (Normal city wear & tear)</option>
+                  <option value="poor">Fair (Requires mechanical attention)</option>
+                </select>
+              </div>
+
+              <button type="submit" class="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1.5">
+                <i data-lucide="calculator" class="w-4 h-4"></i>
+                Calculate Trade-In Valuation
+              </button>
+            </form>
+          </div>
+
+          <!-- Dynamic Result Box -->
+          <div id="exchange-result-box" class="mt-4 p-4 rounded-2xl bg-white border border-slate-200 shadow-sm hidden">
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-slate-500 font-semibold">Estimated Market Value:</span>
+              <span id="ex-result-val" class="font-bold text-slate-900">₹ 38,000</span>
+            </div>
+            <div class="flex items-center justify-between text-xs text-emerald-600 mt-1">
+              <span class="font-semibold">Prashant TVS Dealership Bonus:</span>
+              <span id="ex-result-bonus" class="font-bold">+ ₹ 3,500</span>
+            </div>
+            <div class="flex items-center justify-between text-sm font-extrabold text-slate-950 pt-2 mt-2 border-t border-slate-100">
+              <span>Total Exchange Credit:</span>
+              <span id="ex-result-total" class="text-[#013D93] text-base">₹ 41,500</span>
+            </div>
+            <p class="text-[10px] text-slate-400 mt-2 text-center">Bring vehicle to Bibwewadi showroom for physical evaluation & same-day settlement.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CUSTOMER REVIEWS & GOOGLE RATING PROOF SECTION -->
+  <section id="reviews" class="py-20 pb-28 bg-slate-50 border-t border-slate-200 relative z-10 clear-both">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+        <div class="max-w-xl">
+          <span class="text-xs font-bold uppercase tracking-wider text-[#013D93]">Verified Customer Feedback</span>
+          <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mt-1 font-racing tracking-wide">
+            TRUSTED BY RIDERS ACROSS PUNE
+          </h2>
+          <p class="text-sm text-slate-600 mt-1 leading-relaxed">
+            Real experiences from Google Maps & Justdial for Prashant Auto (Prashant TVS).
+          </p>
+        </div>
+
+        <!-- Rating Badges (Guaranteed No Overlapping / Responsive Flex-wrap) -->
+        <div class="flex flex-wrap items-center gap-3.5 shrink-0">
+          <div class="px-4 py-3 bg-white rounded-xl border border-slate-200 shadow-sm flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-amber-50 text-amber-500 font-black text-base flex items-center justify-center shrink-0">
+              4.2★
+            </div>
+            <div>
+              <p class="text-xs font-bold text-slate-900">Google Reviews</p>
+              <p class="text-[11px] text-slate-500">62+ Verified Ratings</p>
+            </div>
+          </div>
+
+          <div class="px-4 py-3 bg-white rounded-xl border border-slate-200 shadow-sm flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-blue-50 text-[#013D93] font-black text-base flex items-center justify-center shrink-0">
+              4.0★
+            </div>
+            <div>
+              <p class="text-xs font-bold text-slate-900">Justdial (Jd)</p>
+              <p class="text-[11px] text-slate-500">267 Verified Votes</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial Cards Grid with Equal Heights and No Overlap -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+        
+        <!-- Aryan Kamdar Review -->
+        <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-[#013D93]/40 transition-all flex flex-col justify-between h-full min-h-[240px]">
+          <div>
+            <div class="flex items-center justify-between text-amber-400 text-xs mb-3">
+              <div class="flex gap-0.5">
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+              </div>
+              <span class="text-[11px] text-slate-400 font-medium">Google Review</span>
+            </div>
+            <p class="text-sm text-slate-700 italic leading-relaxed mb-4">
+              "Amazing service, timely customer support, great pricing. Purchased my two-wheeler and the entire documentation, delivery, and post-sales support was seamless!"
+            </p>
+          </div>
+
+          <div class="flex items-center gap-3 pt-4 border-t border-slate-100 mt-auto">
+            <div class="w-10 h-10 rounded-full bg-blue-50 text-[#013D93] font-bold flex items-center justify-center text-sm shrink-0">
+              AK
+            </div>
+            <div>
+              <h4 class="text-xs font-bold text-slate-900">Aryan Kamdar</h4>
+              <p class="text-[10px] text-slate-500">Verified TVS Owner • Bibwewadi Pune</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-[#013D93]/40 transition-all flex flex-col justify-between h-full min-h-[240px]">
+          <div>
+            <div class="flex items-center justify-between text-amber-400 text-xs mb-3">
+              <div class="flex gap-0.5">
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+              </div>
+              <span class="text-[11px] text-slate-400 font-medium">Google Review</span>
+            </div>
+            <p class="text-sm text-slate-700 italic leading-relaxed mb-4">
+              "Excellent and sincere service, customer oriented staff. They explained all Jupiter 125 features in detail and offered instant loan approval without running around."
+            </p>
+          </div>
+
+          <div class="flex items-center gap-3 pt-4 border-t border-slate-100 mt-auto">
+            <div class="w-10 h-10 rounded-full bg-slate-100 text-slate-700 font-bold flex items-center justify-center text-sm shrink-0">
+              SD
+            </div>
+            <div>
+              <h4 class="text-xs font-bold text-slate-900">Sanjay Deshmukh</h4>
+              <p class="text-[10px] text-slate-500">Local Guide • Pune</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-[#013D93]/40 transition-all flex flex-col justify-between h-full min-h-[240px]">
+          <div>
+            <div class="flex items-center justify-between text-amber-400 text-xs mb-3">
+              <div class="flex gap-0.5">
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+              </div>
+              <span class="text-[11px] text-slate-400 font-medium">Google Review</span>
+            </div>
+            <p class="text-sm text-slate-700 italic leading-relaxed mb-4">
+              "I had a fantastic experience at Prashant TVS Service Centre. They diagnosed an intermittent electrical issue on my Apache RTR that other local mechanics couldn't fix. Genuine parts used."
+            </p>
+          </div>
+
+          <div class="flex items-center gap-3 pt-4 border-t border-slate-100 mt-auto">
+            <div class="w-10 h-10 rounded-full bg-emerald-50 text-emerald-600 font-bold flex items-center justify-center text-sm shrink-0">
+              RM
+            </div>
+            <div>
+              <h4 class="text-xs font-bold text-slate-900">Rahul More</h4>
+              <p class="text-[10px] text-slate-500">TVS Apache Rider • Market Yard</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Action Button -->
+      <div class="mt-12 text-center relative z-10">
+        <a href="https://www.google.com/search?q=prashant+tvs" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white hover:bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700 transition-colors shadow-sm">
+          <i data-lucide="external-link" class="w-4 h-4 text-[#013D93]"></i>
+          Read All 62+ Reviews on Google Maps
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SHOWROOM LOCATION, HOURS & CONNECT SECTION -->
+  <section id="location-contact" class="py-16 bg-white border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        
+        <!-- Left Contact Info Card -->
+        <div class="lg:col-span-5 space-y-6">
+          <span class="text-xs font-bold uppercase tracking-wider text-[#013D93]">Visit Our Dealership</span>
+          <h2 class="text-3xl sm:text-4xl font-black text-slate-900 font-racing tracking-wide">
+            PRASHANT TVS BIBWEWADI
+          </h2>
+
+          <div class="space-y-4">
+            <div class="flex items-start gap-3.5 p-4 rounded-2xl bg-slate-50 border border-slate-200">
+              <div class="w-10 h-10 rounded-xl bg-blue-50 text-[#013D93] flex items-center justify-center shrink-0">
+                <i data-lucide="map-pin" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wide">Showroom & Workshop Address</h4>
+                <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                  Sr. No. 689, Shop. 2 & 3, Swami Vivekanand Rd, opp. ESIC Office / Colony, Bibwewadi, Pune, Maharashtra 411037
+                </p>
+                <p class="text-[11px] text-slate-400 mt-1">Easily accessible from Salisbury Park, Katraj, Swargate & Market Yard</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3.5 p-4 rounded-2xl bg-slate-50 border border-slate-200">
+              <div class="w-10 h-10 rounded-xl bg-blue-50 text-[#013D93] flex items-center justify-center shrink-0">
+                <i data-lucide="phone" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wide">Direct Helpline & Sales Desk</h4>
+                <p class="text-sm font-bold text-slate-900 mt-0.5">
+                  <a href="tel:08459101990" class="hover:text-[#013D93] transition-colors">084591 01990</a>
+                </p>
+                <p class="text-[11px] text-slate-500 mt-0.5">Call for test rides, on-road prices, or workshop slot bookings</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3.5 p-4 rounded-2xl bg-slate-50 border border-slate-200">
+              <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                <i data-lucide="clock" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wide">Showroom Operating Hours</h4>
+                <p class="text-xs font-semibold text-slate-800 mt-0.5">Monday to Sunday: 9:30 AM – 8:30 PM</p>
+                <p class="text-[11px] text-slate-500 mt-0.5">Service Workshop opens at 9:00 AM</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <a href="https://maps.google.com/?q=Prashant+Auto+Bibwewadi+Pune" target="_blank" class="px-5 py-3 rounded-xl bg-[#013D93] hover:bg-[#002D6E] text-white text-xs font-bold shadow-md transition-colors flex items-center gap-2">
+              <i data-lucide="navigation" class="w-4 h-4"></i>
+              Open In Google Maps
+            </a>
+            <a href="https://wa.me/918459101990?text=Hi%20Prashant%20TVS%2C%20I%20want%20to%20enquire%20about%20a%20new%20TVS%20vehicle" target="_blank" class="px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-md transition-colors flex items-center gap-2">
+              <i data-lucide="message-square" class="w-4 h-4"></i>
+              Chat on WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Interactive Map Embed Card -->
+        <div class="lg:col-span-7">
+          <div class="rounded-3xl overflow-hidden border border-slate-200 shadow-xl bg-slate-100 h-[420px] relative">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.9877478663884!2d73.8643806!3d18.4785466!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c01dfff23655%3A0x5a87b9382eabdd7!2sPrashant%20Auto!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+              width="100%" 
+              height="100%" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade"
+              class="w-full h-full"
+            ></iframe>
+
+            <div class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-3.5 rounded-2xl border border-slate-200 shadow-lg flex items-center justify-between">
+              <div>
+                <p class="text-xs font-bold text-slate-900">Prashant TVS (Prashant Auto)</p>
+                <p class="text-[11px] text-slate-500">Opp. ESIC Office, Swami Vivekanand Rd, Bibwewadi</p>
+              </div>
+              <a href="https://maps.google.com/?q=Prashant+Auto+Bibwewadi+Pune" target="_blank" class="px-3.5 py-1.5 bg-[#013D93] text-white rounded-lg text-xs font-bold hover:bg-[#002D6E] transition-colors">
+                Directions
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-900 text-slate-300 pt-16 pb-12 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-12 border-b border-slate-800">
+        
+        <div class="lg:col-span-2 space-y-4">
+          <!-- Official Logo in Footer -->
+          <div class="bg-white p-2.5 rounded-xl inline-block shadow-sm">
+            <img src="assets/logo/prashant_tvs_logo_cropped.png" alt="Prashant TVS Logo" class="h-10 w-auto object-contain" />
+          </div>
+          <p class="text-xs text-slate-400 max-w-sm leading-relaxed">
+            Authorised Two Wheeler Dealer for TVS Motor Company. Sales showroom and fully-equipped service center in Bibwewadi, Pune.
+          </p>
+          <div class="flex items-center gap-2 text-xs font-semibold text-slate-300">
+            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+            Authorised Dealership Code • Pune South Zone
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-3">Popular Bikes</h4>
+          <ul class="space-y-2 text-xs text-slate-400">
+            <li><a href="#sales-catalog" class="hover:text-white transition-colors">TVS Apache RTR 160 4V</a></li>
+            <li><a href="#sales-catalog" class="hover:text-white transition-colors">TVS Apache RTR 310</a></li>
+            <li><a href="#sales-catalog" class="hover:text-white transition-colors">TVS Raider 125</a></li>
+            <li><a href="#sales-catalog" class="hover:text-white transition-colors">TVS Ronin 225</a></li>
+            <li><a href="#sales-catalog" class="hover:text-white transition-colors">TVS Radeon & Sport</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-3">Popular Scooters & EV</h4>
+          <ul class="space-y-2 text-xs text-slate-400">
+            <li><a href="#sales-catalog" class="hover:text-white transition-colors">TVS Jupiter 125</a></li>
+            <li><a href="#sales-catalog" class="hover:text-white transition-colors">TVS Ntorq 125 Race XP</a></li>
+            <li><a href="#sales-catalog" class="hover:text-white transition-colors">TVS iQube Electric</a></li>
+            <li><a href="#sales-catalog" class="hover:text-white transition-colors">TVS Scooty Zest 110</a></li>
+            <li><a href="#sales-catalog" class="hover:text-white transition-colors">TVS XL100 Heavy Duty</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-3">Service & Workshop</h4>
+          <ul class="space-y-2 text-xs text-slate-400">
+            <li><a href="#workshop-service" class="hover:text-white transition-colors">Book Service Slot</a></li>
+            <li><a href="#workshop-service" class="hover:text-white transition-colors">TVS TRU4 Genuine Oil</a></li>
+            <li><a href="#workshop-service" class="hover:text-white transition-colors">Doorstep Pick-Up & Drop</a></li>
+            <li><a href="#finance-calculator" class="hover:text-white transition-colors">EMI Loan Calculator</a></li>
+            <li><a href="#finance-calculator" class="hover:text-white transition-colors">Old Two-Wheeler Exchange</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+        <p>© 2026 Prashant Auto (Prashant TVS) • All rights reserved. Authorised TVS Dealership, Bibwewadi, Pune.</p>
+        <div class="flex items-center gap-4">
+          <a href="#" class="hover:text-slate-400">Privacy Policy</a>
+          <span>•</span>
+          <a href="#" class="hover:text-slate-400">Terms of Service</a>
+          <span>•</span>
+          <a href="tel:08459101990" class="text-red-400 font-bold hover:underline">084591 01990</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- STICKY FLOATING QUICK CONTACT BAR -->
+  <div class="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:bottom-6 z-40 flex items-center justify-center sm:justify-end gap-2.5">
+    <a href="https://wa.me/918459101990?text=Hi%20Prashant%20TVS%20Bibwewadi%2C%20I%20would%20like%20to%20enquire%20about%20a%20new%20two-wheeler" target="_blank" class="flex items-center gap-2 px-4 py-3 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-xl shadow-emerald-600/30 transition-all hover:scale-105">
+      <i data-lucide="message-circle" class="w-4 h-4"></i>
+      <span>WhatsApp Us</span>
+    </a>
+
+    <a href="tel:08459101990" class="flex items-center gap-2 px-4 py-3 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shadow-xl transition-all hover:scale-105">
+      <i data-lucide="phone-call" class="w-4 h-4 text-red-500"></i>
+      <span>Call Showroom</span>
+    </a>
+
+    <button onclick="openTestRideModal()" class="flex items-center gap-2 px-5 py-3 rounded-full bg-[#013D93] hover:bg-[#002D6E] text-white font-bold text-xs shadow-xl shadow-[#013D93]/30 transition-all hover:scale-105">
+      <i data-lucide="zap" class="w-4 h-4 text-amber-300"></i>
+      <span>Test Ride</span>
+    </button>
+  </div>
+
+  <!-- MODAL 1: BOOK FREE TEST RIDE -->
+  <div id="test-ride-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm">
+    <div class="bg-white rounded-3xl border border-slate-200 shadow-2xl max-w-md w-full overflow-hidden">
+      <div class="bg-gradient-to-r from-[#013D93] to-[#002D6E] p-5 text-white flex items-center justify-between">
+        <div>
+          <span class="text-[10px] font-extrabold uppercase tracking-widest bg-white/20 px-2 py-0.5 rounded">Prashant TVS Bibwewadi</span>
+          <h3 class="text-lg font-black mt-1">Book Free Test Ride</h3>
+        </div>
+        <button onclick="closeTestRideModal()" class="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center text-white transition-colors">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <form onsubmit="handleTestRideSubmit(event)" class="p-6 space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Your Full Name</label>
+          <input type="text" id="tr-name" placeholder="Aryan Kamdar" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-[#013D93] focus:outline-none" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Mobile Phone Number</label>
+          <input type="tel" id="tr-phone" placeholder="98XXXXXXXX" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-[#013D93] focus:outline-none" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Select Two-Wheeler to Test Ride</label>
+          <select id="tr-model-select" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold focus:ring-2 focus:ring-[#013D93] focus:outline-none">
+            <option value="TVS Apache RTR 160 4V">TVS Apache RTR 160 4V (Dual-Channel ABS)</option>
+            <option value="TVS Apache RTR 310">TVS Apache RTR 310 (Flagship Brawler)</option>
+            <option value="TVS Jupiter 125">TVS Jupiter 125 (SmartXonnect)</option>
+            <option value="TVS Ntorq 125 Race XP">TVS Ntorq 125 Race XP</option>
+            <option value="TVS Raider 125">TVS Raider 125 (Wicked Commuter)</option>
+            <option value="TVS Ronin 225">TVS Ronin 225 (Modern Retro)</option>
+            <option value="TVS iQube Electric">TVS iQube Electric EV</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Test Ride Preference</label>
+          <select id="tr-location-type" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold focus:ring-2 focus:ring-[#013D93] focus:outline-none">
+            <option value="Showroom Visit">At Prashant TVS Showroom (Bibwewadi)</option>
+            <option value="Doorstep Test Ride">Doorstep Test Ride (Pune South / Bibwewadi)</option>
+          </select>
+        </div>
+
+        <button type="submit" class="w-full py-3.5 rounded-xl bg-[#013D93] hover:bg-[#002D6E] text-white font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2">
+          <i data-lucide="check" class="w-4 h-4"></i>
+          Confirm Booking & Send WhatsApp
+        </button>
+
+        <p class="text-[10px] text-center text-slate-400">
+          Valid driver's license required for test ride • No commitment necessary
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 2: ITEMISED ON-ROAD PRICE QUOTATION -->
+  <div id="quote-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm">
+    <div class="bg-white rounded-3xl border border-slate-200 shadow-2xl max-w-md w-full overflow-hidden">
+      <div class="bg-slate-900 p-5 text-white flex items-center justify-between">
+        <div>
+          <span class="text-[10px] font-extrabold uppercase tracking-widest text-red-400">Official Estimate</span>
+          <h3 class="text-base font-bold mt-0.5" id="quote-model-name">Price Quotation</h3>
+        </div>
+        <button onclick="closeQuoteModal()" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-white">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="p-6 space-y-4">
+        <div class="space-y-2.5 text-xs">
+          <div class="flex justify-between py-1.5 border-b border-slate-100">
+            <span class="text-slate-500">Ex-Showroom Price:</span>
+            <span id="quote-ex-showroom" class="font-bold text-slate-900">₹ 0</span>
+          </div>
+          <div class="flex justify-between py-1.5 border-b border-slate-100">
+            <span class="text-slate-500">RTO Registration (MH-12 Pune):</span>
+            <span id="quote-rto" class="font-semibold text-slate-800">₹ 0</span>
+          </div>
+          <div class="flex justify-between py-1.5 border-b border-slate-100">
+            <span class="text-slate-500">5-Yr Comprehensive Insurance:</span>
+            <span id="quote-insurance" class="font-semibold text-slate-800">₹ 0</span>
+          </div>
+          <div class="flex justify-between py-1.5 border-b border-slate-100">
+            <span class="text-slate-500">Standard Accessories & RSA:</span>
+            <span id="quote-rsa" class="font-semibold text-slate-800">₹ 1,450</span>
+          </div>
+          <div class="flex justify-between py-2 bg-blue-50 px-3 rounded-xl border border-blue-100 text-sm font-black text-[#013D93]">
+            <span>Estimated On-Road Pune:</span>
+            <span id="quote-on-road">₹ 0</span>
+          </div>
+        </div>
+
+        <div class="flex gap-2 pt-2">
+          <button onclick="printQuotation()" class="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1.5">
+            <i data-lucide="printer" class="w-4 h-4"></i>
+            Print Quote
+          </button>
+          <a href="https://wa.me/918459101990?text=Hi%20Prashant%20TVS%2C%20please%20send%20me%20the%20detailed%20on-road%20quote" target="_blank" class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1.5">
+            <i data-lucide="message-square" class="w-4 h-4"></i>
+            WhatsApp Quote
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 3: FULLSCREEN REAL SHOWROOM PHOTO LIGHTBOX -->
+  <div id="lightbox-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 lightbox-overlay">
+    <div class="relative max-w-4xl w-full bg-white rounded-3xl overflow-hidden shadow-2xl">
+      <button onclick="closeLightbox()" class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-slate-900/80 hover:bg-slate-900 text-white flex items-center justify-center transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="h-[460px] sm:h-[520px] bg-slate-950 flex items-center justify-center overflow-hidden">
+        <img id="lightbox-image" src="" alt="Prashant TVS Showroom" class="max-h-full max-w-full object-contain" />
+      </div>
+
+      <div class="p-5 bg-white">
+        <h4 id="lightbox-title" class="text-lg font-bold text-slate-900"></h4>
+        <p id="lightbox-desc" class="text-xs text-slate-600 mt-1"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toast-container" class="fixed top-6 right-6 z-50 flex flex-col gap-2 pointer-events-none [&>*]:pointer-events-auto"></div>
+
+  <!-- Main Application Script -->
+  <script src="app.js"></script>
+</body>
+</html>

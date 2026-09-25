@@ -1,0 +1,13 @@
+{
+  "name": "prashant-tvs-web",
+  "version": "1.0.0",
+  "description": "3D Elegant Official Website for Prashant TVS (Prashant Auto) Bibwewadi Pune",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve -l 3000 .",
+    "dev": "python -m http.server 3000"
+  },
+  "keywords": ["tvs", "prashant-auto", "bibwewadi", "pune", "threejs", "two-wheeler"],
+  "author": "Aryan Kamdar",
+  "license": "ISC"
+}
